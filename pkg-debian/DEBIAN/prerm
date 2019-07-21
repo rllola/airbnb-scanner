@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rm /usr/bin/AirbnbScanner
+rm /etc/ld.so.conf.d/airbnb-scanner.conf
