@@ -1,0 +1,44 @@
+matrix:
+    include:
+      - os: linux
+        language: generic
+        python: "3.7"
+        sudo: required
+        dist: xenial
+        services:
+          - xvfb
+        before_install:
+          - sudo apt-get install -y python3-pip libgl1-mesa-glx libnss3 libxcomposite-dev libxcursor-dev libxi6 libxtst6 libasound2 libegl1-mesa libxkbcommon-x11-0
+          - export QT_QPA_PLATFORM=offscreen
+        before_deploy:
+          - ./scripts/generate_deb_files.sh
+          - export FILE=AirbnbScanner_${TRAVIS_TAG}_i386.deb
+          - mv dist/AirbnbScanner pkg-debian/usr/share/
+          - dpkg -b pkg-debian/ $FILE
+      - os: osx
+        language: generic
+        env: TOXENV=py37
+        sudo: true
+        before_deploy:
+          - nvm install --lts
+          - nvm use --lts
+          - npm install -g create-dmg
+          - cd dist/
+          - export FILE=AirbnbScanner_${TRAVIS_TAG}.dmg
+          - create-dmg 'AirbnbScanner.app' || true
+          - mv AirbnbScanner\ ${TRAVIS_TAG/v}.dmg $FILE
+
+install:
+  - pip3 install -r requirements.txt
+script:
+  - pyinstaller --windowed browser.spec
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: $GH_TOKEN
+  file:
+    - $FILE
+  on:
+    tags: true

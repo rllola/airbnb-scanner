@@ -1,3 +1,5 @@
+altgraph==0.16.1
+PyInstaller==3.5
 PyQt5==5.13.0
 PyQt5-sip==4.19.18
 scapy==2.4.2
