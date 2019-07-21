@@ -1,0 +1,42 @@
+platform:
+  - x64
+
+image: Visual Studio 2017
+
+environment:
+  matrix:
+    - PYTHON: "C:\\Python37-x64"
+      PATH: C:\Program Files (x86)\NSIS\;%PATH%
+
+artifacts:
+  - path: AirbnbScanner_%APPVEYOR_REPO_TAG_NAME%_setup.exe
+
+build: off
+
+init:
+  - cmd: copy C:\windows\system32\libeay32.dll C:\Qt\5.12\msvc2017_64\bin
+  - cmd: copy C:\windows\system32\ssleay32.dll C:\Qt\5.12\msvc2017_64\bin
+  - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.12\msvc2017_64\bin;%PATH%
+  - python -m pip install --upgrade pip
+
+install:
+  - python -m pip install -r requirements.txt
+
+test_script:
+  - pyinstaller airbnb-scanner.spec
+
+after_test:
+  - ps: $size = [math]::floor((Get-ChildItem dist\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
+  - ps: if ($env:APPVEYOR_REPO_TAG_NAME) { $tag = $env:APPVEYOR_REPO_TAG_NAME } else { $tag="v0.0.0" }
+  - ps: $major, $minor, $build = $tag.substring(1).split(".")
+  - ps: makensis.exe /DTAG=$tag /DSIZE=$size /DMAJOR=$major /DMINOR=$minor /DBUILD=$build airbnbscanner.nsi
+
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: 6eX2olaIxe4TsfETod+SYOyDsIKwmDivjirb7RPvl/Zd4zYW3dzGr4MieJ2BP89P # your encrypted token from GitHub
+  artifact: AirbnbScanner_%APPVEYOR_REPO_TAG_NAME%_setup.exe
+  prerelease: true
+  force_update: true
+  on:
+    appveyor_repo_tag: true        # deploy on tag push only
