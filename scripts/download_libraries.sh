@@ -8,4 +8,4 @@ wget https://www.riverbankcomputing.com/static/Downloads/PyQtChart/5.12/PyQtChar
 wget https://www.riverbankcomputing.com/static/Downloads/PyQtDataVisualization/5.12/PyQtDataVisualization_gpl-5.12.tar.gz
 wget https://www.riverbankcomputing.com/static/Downloads/PyQtPurchasing/5.12/PyQtPurchasing_gpl-5.12.tar.gz
 wget https://www.riverbankcomputing.com/static/Downloads/QScintilla/2.11.1/QScintilla_gpl-2.11.1.tar.gz
-wget https://ftp.openssl.org/source/old/1.0.2/openssl-1.0.2r.tar.gz
+wget https://ftp.openssl.org/source/old/1.0.2/openssl-1.1.0j.tar.gz
