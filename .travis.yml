@@ -8,7 +8,7 @@ matrix:
         services:
           - xvfb
         before_install:
-          - sudo apt-get install -y python3-pip libffi-dev libgl1-mesa-glx libnss3 libxcomposite-dev libxcursor-dev libxi6 libxtst6 libasound2 libegl1-mesa libxkbcommon-x11-0 libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libx11-xcb-dev libxcb-glx0-dev libxkbcommon-x11-dev
+          - sudo apt-get install -y build-dep qt5-default python3-pip libffi-dev libgl1-mesa-glx libnss3 libxcomposite-dev libxcursor-dev libxi6 libxtst6 libasound2 libegl1-mesa libxkbcommon-x11-0 libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libx11-xcb-dev libxcb-glx0-dev libxkbcommon-x11-dev
           - export QT_QPA_PLATFORM=offscreen
         before_deploy:
           - ./scripts/generate_deb_files.sh
