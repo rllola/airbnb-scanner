@@ -13,7 +13,8 @@ matrix:
         before_deploy:
           - ./scripts/generate_deb_files.sh
           - export FILE=AirbnbScanner_${TRAVIS_TAG}_i386.deb
-          - mv dist/AirbnbScanner pkg-debian/usr/share/
+          - mkdir pkg-debian/usr/share/AirbnbScanner
+          - cp build-linux-64/AirbnbScanner pkg-debian/usr/share/AirbnbScanner/AirbnbScanner
           - dpkg -b pkg-debian/ $FILE
       - os: osx
         language: generic
@@ -29,10 +30,11 @@ matrix:
           - mv AirbnbScanner\ ${TRAVIS_TAG/v}.dmg $FILE
 
 install:
-  - pip3 install setuptools
+  - ./scripts/download_libraries.sh
+  - pip3 install setuptools pyqtdeploy
   - pip3 install -r requirements.txt
 script:
-  - pyinstaller --windowed airbnb-scanner.spec
+  - python build.py --verbose
 
 deploy:
   provider: releases

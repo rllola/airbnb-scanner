@@ -1,7 +1,11 @@
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import QFile, QIODevice, QDir
 import json
 import scapy.all as scapy
+import os
+import data
+import sys
 
 
 class Application(QApplication):
@@ -17,7 +21,12 @@ class Application(QApplication):
         self.quitAction = self.menu.addAction("Quit")
         self.quitAction.triggered.connect(self.quit)
 
-        self.icon = QIcon("./icons/spy-light.png")
+        prefix_path = "."
+
+        if ":/" in sys.path:
+            prefix_path = ":"
+
+        self.icon = QIcon(os.path.join(prefix_path,"icons","spy-light.png"))
 
         # Create the tray
         self.tray = QSystemTrayIcon(self.icon, None)
@@ -37,8 +46,16 @@ class Application(QApplication):
         self.device_menu = QMenu("Devices")
 
         clients_list = []
-        with open("./data/macaddress.io-db.json") as f:
-            content = f.readlines()
+
+        qf = QFile(data.__file__.replace("__init__.pyo", "macaddress.io-db.json"))
+        qf.open(QIODevice.ReadOnly | QIODevice.Text)
+        content = qf.readAll()
+        content = bytes(content).decode().split("\n")
+        qf.close()
+
+        # Remove last empty item
+        del content[-1]
+
         for element in answered_list:
             print(element[1].hwsrc)
             client_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
