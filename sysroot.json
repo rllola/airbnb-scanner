@@ -1,8 +1,7 @@
 {
     "Description": "The sysroot for the Airbnb Scanner application.",
 
-    "android|macos|win#openssl": {
-        "android#source":   "openssl-1.0.2r.tar.gz",
+    "macos|win#openssl": {
         "macos|win#source": "openssl-1.1.0j.tar.gz",
         "win#no_asm":       true
     },
@@ -13,28 +12,24 @@
     },
 
     "qt5": {
-        "android-32#qt_dir":        "android_armv7",
-        "android-64#qt_dir":        "android_arm64_v8a",
-        "ios#qt_dir":               "ios",
-
         "linux|macos|win#source":   "qt-everywhere-src-5.12.2.tar.xz",
         "edition":                  "opensource",
 
-        "android|linux#ssl":        "openssl-runtime",
-        "ios#ssl":                  "securetransport",
+        "linux#ssl":        "openssl-runtime",
         "macos|win#ssl":            "openssl-linked",
 
         "configure_options":        [
-                "-opengl", "desktop", "-qt-pcre"
+                "-no-opengl"
         ],
         "skip":                     [
-                "qtactiveqt", "qtconnectivity", "qtdoc", "qtgamepad",
-                "qtlocation", "qtmultimedia", "qtnetworkauth",
+                "qt3d", "qtactiveqt", "qtandroidextras", "qtcanvas3d", "qtcharts", "qtconnectivity", "qtdatavis3d",
+                "qtdoc", "qtgamepad", "qtgraphicaleffects", "qtimageformats",
+                "qtlocation", "qtmacextras", "qtmultimedia", "qtnetworkauth", "qtpurchasing",
                 "qtquickcontrols", "qtquickcontrols2", "qtremoteobjects",
                 "qtscript", "qtscxml", "qtsensors", "qtserialbus",
                 "qtserialport", "qtspeech", "qtsvg", "qttools",
-                "qttranslations", "qtwayland", "qtwebchannel", "qtwebengine",
-                "qtwebsockets", "qtwebview", "qtxmlpatterns"
+                "qttranslations", "qtvirtualkeyboard", "qtwayland", "qtwebchannel", "qtwebengine",
+                "qtwebsockets", "qtwebview", "qtwinextras", "qtxmlpatterns"
         ],
 
         "static_msvc_runtime":      true
@@ -52,58 +47,19 @@
     },
 
     "pyqt5": {
-        "android#disabled_features":    [
-                "PyQt_Desktop_OpenGL", "PyQt_Printer", "PyQt_PrintDialog",
-                "PyQt_PrintPreviewDialog", "PyQt_PrintPreviewWidget"
-        ],
-        "android#modules":              [
-                "QtCore", "QtGui", "QtNetwork", "QtPrintSupport", "QtWidgets",
-                "QtAndroidExtras"
-        ],
-
-        "ios#disabled_features":        [
-                "PyQt_Desktop_OpenGL", "PyQt_MacOSXOnly",
-                "PyQt_MacCocoaViewContainer", "PyQt_Printer",
-                "PyQt_PrintDialog", "PyQt_PrintPreviewDialog",
-                "PyQt_PrintPreviewWidget", "PyQt_Process",
-                "PyQt_NotBootstrapped"
-        ],
-        "ios|macos#modules":            [
-                "QtCore", "QtGui", "QtNetwork", "QtPrintSupport", "QtWidgets",
-                "QtMacExtras"
+        "macos#modules":            [
+                "QtCore", "QtGui", "QtWidgets", "QtMacExtras"
         ],
 
         "linux#modules":                [
-                "QtCore", "QtGui", "QtNetwork", "QtPrintSupport", "QtWidgets",
-                "QtX11Extras"
+                "QtCore", "QtGui", "QtWidgets", "QtX11Extras"
         ],
 
         "win#disabled_features":        ["PyQt_Desktop_OpenGL"],
         "win#modules":                  [
-                "QtCore", "QtGui", "QtNetwork", "QtPrintSupport", "QtWidgets",
-                "QtWinExtras"
+                "QtCore", "QtGui", "QtWidgets", "QtWinExtras"
         ],
 
-        "source":                       "PyQt5_*-5.12.1.tar.gz"
-    },
-
-    "pyqt3d": {
-        "source":   "PyQt3D_*-5.12.tar.gz"
-    },
-
-    "pyqtchart": {
-        "source":   "PyQtChart_*-5.12.tar.gz"
-    },
-
-    "pyqtdatavisualization": {
-        "source":   "PyQtDataVisualization_*-5.12.tar.gz"
-    },
-
-    "pyqtpurchasing": {
-        "source":   "PyQtPurchasing_*-5.12.tar.gz"
-    },
-
-    "qscintilla": {
-        "source":   "QScintilla_*-2.11.1.tar.gz"
+        "source": "PyQt5_*-5.12.1.tar.gz"
     }
 }
