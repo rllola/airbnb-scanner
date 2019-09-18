@@ -4,6 +4,24 @@ matrix:
         language: generic
         python: "3.7"
         sudo: required
+        addons:
+          apt:
+            update: true
+            sources:
+              - ubuntu-toolchain-r-test
+            packages:
+              - python-dev
+              - python-all
+              - python-all-dev
+              - python-gevent
+              - python-greenlet
+              - python-minimal
+              - python-msgpack
+              - python-wheel
+              - g++-7
+              - gcc-7
+        env:
+          - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
         dist: xenial
         services:
           - xvfb
