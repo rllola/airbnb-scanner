@@ -19,7 +19,7 @@
         "macos|win#ssl":            "openssl-linked",
 
         "configure_options":        [
-                "-no-opengl", "-qt-pcre"
+                "-opengl", "desktop", "-qt-pcre"
         ],
         "skip":                     [
                 "qt3d", "qtactiveqt", "qtandroidextras", "qtcanvas3d", "qtcharts", "qtconnectivity", "qtdatavis3d",
