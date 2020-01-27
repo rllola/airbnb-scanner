@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt5.QtGui import QIcon
 import json
 import scapy.all as scapy
-
+import os
 
 class Application(QApplication):
     """Application class"""
@@ -37,7 +37,11 @@ class Application(QApplication):
         self.device_menu = QMenu("Devices")
 
         clients_list = []
-        with open("./data/macaddress.io-db.json") as f:
+        macaddress_file = os.path.join("data", "macaddress.io-db.json")
+        print(macaddress_file)
+        print(os.path.isfile(macaddress_file))
+        with open(macaddress_file, encoding='utf-8') as f:
+            print(f)
             content = f.readlines()
         for element in answered_list:
             print(element[1].hwsrc)

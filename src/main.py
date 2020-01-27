@@ -2,6 +2,7 @@
 # -*- encoding: utf-8 -*-
 import sys
 import os
+from multiprocessing import freeze_support
 
 print(sys.path)
 
@@ -27,6 +28,8 @@ from application import Application
 
 
 def main():
+    freeze_support()
+
     print('Starting...')
     app = Application(sys.argv)
 
