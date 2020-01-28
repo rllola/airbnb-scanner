@@ -1,0 +1,199 @@
+Binary files plugins_old/contrib/__pycache__/__init__.cpython-36.pyc and plugins/contrib/__pycache__/__init__.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/__init__.cpython-36.pyc and plugins/__pycache__/__init__.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/openssl.cpython-36.pyc and plugins/__pycache__/openssl.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/pip.cpython-36.pyc and plugins/__pycache__/pip.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/pyqt3d.cpython-36.pyc and plugins/__pycache__/pyqt3d.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/pyqt5.cpython-36.pyc and plugins/__pycache__/pyqt5.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/pyqtchart.cpython-36.pyc and plugins/__pycache__/pyqtchart.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/pyqtdatavisualization.cpython-36.pyc and plugins/__pycache__/pyqtdatavisualization.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/pyqtpurchasing.cpython-36.pyc and plugins/__pycache__/pyqtpurchasing.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/pyqtwebengine.cpython-36.pyc and plugins/__pycache__/pyqtwebengine.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/qscintilla.cpython-36.pyc and plugins/__pycache__/qscintilla.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/qt5.cpython-36.pyc and plugins/__pycache__/qt5.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/sip.cpython-36.pyc and plugins/__pycache__/sip.cpython-36.pyc differ
+Binary files plugins_old/__pycache__/zlib.cpython-36.pyc and plugins/__pycache__/zlib.cpython-36.pyc differ
+diff -ruN plugins_old/pyqt5.py plugins/pyqt5.py
+--- plugins_old/pyqt5.py	2019-03-22 23:07:25.000000000 +0100
++++ plugins/pyqt5.py	2019-09-19 10:26:57.637424739 +0200
+@@ -3,14 +3,14 @@
+ #
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are met:
+-# 
++#
+ # 1. Redistributions of source code must retain the above copyright notice,
+ #    this list of conditions and the following disclaimer.
+-# 
++#
+ # 2. Redistributions in binary form must reproduce the above copyright notice,
+ #    this list of conditions and the following disclaimer in the documentation
+ #    and/or other materials provided with the distribution.
+-# 
++#
+ # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+@@ -28,6 +28,7 @@
+ 
+ from ... import ComponentBase, ComponentOption
+ 
++import multiprocessing
+ 
+ class PyQt5Component(ComponentBase):
+     """ The PyQt5 component. """
+@@ -93,7 +94,7 @@
+             args.append('--verbose')
+ 
+         sysroot.run(*args)
+-        sysroot.run(sysroot.host_make)
++        sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
+         sysroot.run(sysroot.host_make, 'install')
+ 
+     def configure(self, sysroot):
+diff -ruN plugins_old/pyqtwebengine.py plugins/pyqtwebengine.py
+--- plugins_old/pyqtwebengine.py	2019-03-22 23:07:25.000000000 +0100
++++ plugins/pyqtwebengine.py	2020-01-28 18:51:56.870090429 +0100
+@@ -3,14 +3,14 @@
+ #
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are met:
+-# 
++#
+ # 1. Redistributions of source code must retain the above copyright notice,
+ #    this list of conditions and the following disclaimer.
+-# 
++#
+ # 2. Redistributions in binary form must reproduce the above copyright notice,
+ #    this list of conditions and the following disclaimer in the documentation
+ #    and/or other materials provided with the distribution.
+-# 
++#
+ # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+@@ -92,7 +92,7 @@
+             args.append('--verbose')
+ 
+         sysroot.run(*args)
+-        sysroot.run(sysroot.host_make)
++        sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
+         sysroot.run(sysroot.host_make, 'install')
+ 
+     def configure(self, sysroot):
+Binary files plugins_old/python/__pycache__/configure_python.cpython-36.pyc and plugins/python/__pycache__/configure_python.cpython-36.pyc differ
+Binary files plugins_old/python/__pycache__/__init__.cpython-36.pyc and plugins/python/__pycache__/__init__.cpython-36.pyc differ
+Binary files plugins_old/python/__pycache__/pyconfig.cpython-36.pyc and plugins/python/__pycache__/pyconfig.cpython-36.pyc differ
+Binary files plugins_old/python/__pycache__/python.cpython-36.pyc and plugins/python/__pycache__/python.cpython-36.pyc differ
+diff -ruN plugins_old/qt5.py plugins/qt5.py
+--- plugins_old/qt5.py	2019-03-22 23:07:26.000000000 +0100
++++ plugins/qt5.py	2019-09-19 10:26:18.021169265 +0200
+@@ -3,14 +3,14 @@
+ #
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are met:
+-# 
++#
+ # 1. Redistributions of source code must retain the above copyright notice,
+ #    this list of conditions and the following disclaimer.
+-# 
++#
+ # 2. Redistributions in binary form must reproduce the above copyright notice,
+ #    this list of conditions and the following disclaimer in the documentation
+ #    and/or other materials provided with the distribution.
+-# 
++#
+ # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+@@ -29,6 +29,7 @@
+ 
+ from ... import ComponentBase, ComponentOption
+ 
++import multiprocessing
+ 
+ class Qt5Component(ComponentBase):
+     """ The Qt5 component. """
+@@ -239,7 +240,7 @@
+             args.append('-qt-xcb')
+ 
+         sysroot.run(*args)
+-        sysroot.run(sysroot.host_make)
++        sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
+         sysroot.run(sysroot.host_make, 'install')
+ 
+         if original_path is not None:
+diff -ruN plugins_old/sip.py plugins/sip.py
+--- plugins_old/sip.py	2019-03-22 23:07:26.000000000 +0100
++++ plugins/sip.py	2019-09-19 11:05:44.229153959 +0200
+@@ -3,14 +3,14 @@
+ #
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are met:
+-# 
++#
+ # 1. Redistributions of source code must retain the above copyright notice,
+ #    this list of conditions and the following disclaimer.
+-# 
++#
+ # 2. Redistributions in binary form must reproduce the above copyright notice,
+ #    this list of conditions and the following disclaimer in the documentation
+ #    and/or other materials provided with the distribution.
+-# 
++#
+ # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+@@ -28,6 +28,8 @@
+ 
+ from ... import ComponentBase, ComponentOption
+ 
++import multiprocessing
++
+ 
+ class SIPComponent(ComponentBase):
+     """ The SIP component. """
+@@ -118,5 +120,5 @@
+ 
+         sysroot.run(*args)
+         sysroot.run(sysroot.host_qmake)
+-        sysroot.run(sysroot.host_make)
++        sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
+         sysroot.run(sysroot.host_make, 'install')
+diff -ruN plugins_old/zlib.py plugins/zlib.py
+--- plugins_old/zlib.py	2019-03-22 23:07:26.000000000 +0100
++++ plugins/zlib.py	2019-09-19 10:25:58.385044913 +0200
+@@ -3,14 +3,14 @@
+ #
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are met:
+-# 
++#
+ # 1. Redistributions of source code must retain the above copyright notice,
+ #    this list of conditions and the following disclaimer.
+-# 
++#
+ # 2. Redistributions in binary form must reproduce the above copyright notice,
+ #    this list of conditions and the following disclaimer in the documentation
+ #    and/or other materials provided with the distribution.
+-# 
++#
+ # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+@@ -28,6 +28,7 @@
+ 
+ from ... import ComponentBase, ComponentOption
+ 
++import multiprocessing
+ 
+ class zlibComponent(ComponentBase):
+     """ The zlib component. """
+@@ -92,7 +93,7 @@
+ 
+             sysroot.run('./configure', '--static',
+                     '--prefix=' + sysroot.sysroot_dir)
+-            sysroot.run(sysroot.host_make)
++            sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
+             sysroot.run(sysroot.host_make, 'install')
+ 
+             if sysroot.target_platform_name == 'ios':
