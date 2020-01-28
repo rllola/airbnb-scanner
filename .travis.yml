@@ -36,7 +36,7 @@ install:
   - pip3 install -r requirements.txt
 script:
   #- python3 build.py --verbose
-  - pyqtdeploy-sysroot --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
+  - pyqtdeploy-sysroot --target linux-64 --sysroot sysroot-linux-64 sysroot.json
 
 deploy:
   provider: releases
