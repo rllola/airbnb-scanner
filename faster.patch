@@ -1,20 +1,84 @@
-Binary files plugins_old/contrib/__pycache__/__init__.cpython-36.pyc and plugins/contrib/__pycache__/__init__.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/__init__.cpython-36.pyc and plugins/__pycache__/__init__.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/openssl.cpython-36.pyc and plugins/__pycache__/openssl.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/pip.cpython-36.pyc and plugins/__pycache__/pip.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/pyqt3d.cpython-36.pyc and plugins/__pycache__/pyqt3d.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/pyqt5.cpython-36.pyc and plugins/__pycache__/pyqt5.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/pyqtchart.cpython-36.pyc and plugins/__pycache__/pyqtchart.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/pyqtdatavisualization.cpython-36.pyc and plugins/__pycache__/pyqtdatavisualization.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/pyqtpurchasing.cpython-36.pyc and plugins/__pycache__/pyqtpurchasing.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/pyqtwebengine.cpython-36.pyc and plugins/__pycache__/pyqtwebengine.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/qscintilla.cpython-36.pyc and plugins/__pycache__/qscintilla.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/qt5.cpython-36.pyc and plugins/__pycache__/qt5.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/sip.cpython-36.pyc and plugins/__pycache__/sip.cpython-36.pyc differ
-Binary files plugins_old/__pycache__/zlib.cpython-36.pyc and plugins/__pycache__/zlib.cpython-36.pyc differ
-diff -ruN plugins_old/pyqt5.py plugins/pyqt5.py
---- plugins_old/pyqt5.py	2019-03-22 23:07:25.000000000 +0100
-+++ plugins/pyqt5.py	2019-09-19 10:26:57.637424739 +0200
+Binary files pyqtdeploy_old/builder/__pycache__/builder.cpython-36.pyc and pyqtdeploy/builder/__pycache__/builder.cpython-36.pyc differ
+Binary files pyqtdeploy_old/builder/__pycache__/__init__.cpython-36.pyc and pyqtdeploy/builder/__pycache__/__init__.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/application_page.cpython-36.pyc and pyqtdeploy/gui/__pycache__/application_page.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/better_form.cpython-36.pyc and pyqtdeploy/gui/__pycache__/better_form.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/exception_handlers.cpython-36.pyc and pyqtdeploy/gui/__pycache__/exception_handlers.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/filename_editor.cpython-36.pyc and pyqtdeploy/gui/__pycache__/filename_editor.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/filename_editor_delegate.cpython-36.pyc and pyqtdeploy/gui/__pycache__/filename_editor_delegate.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/__init__.cpython-36.pyc and pyqtdeploy/gui/__pycache__/__init__.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/locations_page.cpython-36.pyc and pyqtdeploy/gui/__pycache__/locations_page.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/other_extension_modules_page.cpython-36.pyc and pyqtdeploy/gui/__pycache__/other_extension_modules_page.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/other_packages_page.cpython-36.pyc and pyqtdeploy/gui/__pycache__/other_packages_page.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/package_editor.cpython-36.pyc and pyqtdeploy/gui/__pycache__/package_editor.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/project_gui.cpython-36.pyc and pyqtdeploy/gui/__pycache__/project_gui.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/pyqt_page.cpython-36.pyc and pyqtdeploy/gui/__pycache__/pyqt_page.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/qmake_page.cpython-36.pyc and pyqtdeploy/gui/__pycache__/qmake_page.cpython-36.pyc differ
+Binary files pyqtdeploy_old/gui/__pycache__/standard_library_page.cpython-36.pyc and pyqtdeploy/gui/__pycache__/standard_library_page.cpython-36.pyc differ
+diff -ruN pyqtdeploy_old/message_handler.py pyqtdeploy/message_handler.py
+--- pyqtdeploy_old/message_handler.py	2019-03-22 23:07:25.000000000 +0100
++++ pyqtdeploy/message_handler.py	2020-01-28 22:40:42.707685148 +0100
+@@ -3,14 +3,14 @@
+ #
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are met:
+-# 
++#
+ # 1. Redistributions of source code must retain the above copyright notice,
+ #    this list of conditions and the following disclaimer.
+-# 
++#
+ # 2. Redistributions in binary form must reproduce the above copyright notice,
+ #    this list of conditions and the following disclaimer in the documentation
+ #    and/or other materials provided with the distribution.
+-# 
++#
+ # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+@@ -59,7 +59,7 @@
+         message to somewhere other that stdout.
+         """
+ 
+-        print(message, flush=True)
++        print(message[0:64], flush=True)
+ 
+     @classmethod
+     def error(cls, message):
+Binary files pyqtdeploy_old/metadata/__pycache__/external_libs_metadata.cpython-36.pyc and pyqtdeploy/metadata/__pycache__/external_libs_metadata.cpython-36.pyc differ
+Binary files pyqtdeploy_old/metadata/__pycache__/__init__.cpython-36.pyc and pyqtdeploy/metadata/__pycache__/__init__.cpython-36.pyc differ
+Binary files pyqtdeploy_old/metadata/__pycache__/pyqt4.cpython-36.pyc and pyqtdeploy/metadata/__pycache__/pyqt4.cpython-36.pyc differ
+Binary files pyqtdeploy_old/metadata/__pycache__/pyqt5.cpython-36.pyc and pyqtdeploy/metadata/__pycache__/pyqt5.cpython-36.pyc differ
+Binary files pyqtdeploy_old/metadata/__pycache__/pyqt_metadata.cpython-36.pyc and pyqtdeploy/metadata/__pycache__/pyqt_metadata.cpython-36.pyc differ
+Binary files pyqtdeploy_old/metadata/__pycache__/python_metadata.cpython-36.pyc and pyqtdeploy/metadata/__pycache__/python_metadata.cpython-36.pyc differ
+Binary files pyqtdeploy_old/project/__pycache__/__init__.cpython-36.pyc and pyqtdeploy/project/__pycache__/__init__.cpython-36.pyc differ
+Binary files pyqtdeploy_old/project/__pycache__/project.cpython-36.pyc and pyqtdeploy/project/__pycache__/project.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/file_utilities.cpython-36.pyc and pyqtdeploy/__pycache__/file_utilities.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/__init__.cpython-36.pyc and pyqtdeploy/__pycache__/__init__.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/message_handler.cpython-36.pyc and pyqtdeploy/__pycache__/message_handler.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/platforms.cpython-36.pyc and pyqtdeploy/__pycache__/platforms.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/pyqtdeploybuild_main.cpython-36.pyc and pyqtdeploy/__pycache__/pyqtdeploybuild_main.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/pyqtdeploy_main.cpython-36.pyc and pyqtdeploy/__pycache__/pyqtdeploy_main.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/pyqtdeploysysroot_main.cpython-36.pyc and pyqtdeploy/__pycache__/pyqtdeploysysroot_main.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/user_exception.cpython-36.pyc and pyqtdeploy/__pycache__/user_exception.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/version.cpython-36.pyc and pyqtdeploy/__pycache__/version.cpython-36.pyc differ
+Binary files pyqtdeploy_old/__pycache__/windows.cpython-36.pyc and pyqtdeploy/__pycache__/windows.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/contrib/__pycache__/__init__.cpython-36.pyc and pyqtdeploy/sysroot/plugins/contrib/__pycache__/__init__.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/__init__.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/__init__.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/openssl.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/openssl.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/pip.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/pip.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/pyqt3d.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/pyqt3d.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/pyqt5.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/pyqt5.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/pyqtchart.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/pyqtchart.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/pyqtdatavisualization.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/pyqtdatavisualization.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/pyqtpurchasing.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/pyqtpurchasing.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/pyqtwebengine.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/pyqtwebengine.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/qscintilla.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/qscintilla.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/qt5.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/qt5.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/sip.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/sip.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/__pycache__/zlib.cpython-36.pyc and pyqtdeploy/sysroot/plugins/__pycache__/zlib.cpython-36.pyc differ
+diff -ruN pyqtdeploy_old/sysroot/plugins/pyqt5.py pyqtdeploy/sysroot/plugins/pyqt5.py
+--- pyqtdeploy_old/sysroot/plugins/pyqt5.py	2019-03-22 23:07:25.000000000 +0100
++++ pyqtdeploy/sysroot/plugins/pyqt5.py	2019-09-19 10:26:57.637424739 +0200
 @@ -3,14 +3,14 @@
  #
  # Redistribution and use in source and binary forms, with or without
@@ -50,9 +114,9 @@ diff -ruN plugins_old/pyqt5.py plugins/pyqt5.py
          sysroot.run(sysroot.host_make, 'install')
  
      def configure(self, sysroot):
-diff -ruN plugins_old/pyqtwebengine.py plugins/pyqtwebengine.py
---- plugins_old/pyqtwebengine.py	2019-03-22 23:07:25.000000000 +0100
-+++ plugins/pyqtwebengine.py	2020-01-28 18:51:56.870090429 +0100
+diff -ruN pyqtdeploy_old/sysroot/plugins/pyqtwebengine.py pyqtdeploy/sysroot/plugins/pyqtwebengine.py
+--- pyqtdeploy_old/sysroot/plugins/pyqtwebengine.py	2019-03-22 23:07:25.000000000 +0100
++++ pyqtdeploy/sysroot/plugins/pyqtwebengine.py	2020-01-28 18:51:56.870090429 +0100
 @@ -3,14 +3,14 @@
  #
  # Redistribution and use in source and binary forms, with or without
@@ -80,13 +144,13 @@ diff -ruN plugins_old/pyqtwebengine.py plugins/pyqtwebengine.py
          sysroot.run(sysroot.host_make, 'install')
  
      def configure(self, sysroot):
-Binary files plugins_old/python/__pycache__/configure_python.cpython-36.pyc and plugins/python/__pycache__/configure_python.cpython-36.pyc differ
-Binary files plugins_old/python/__pycache__/__init__.cpython-36.pyc and plugins/python/__pycache__/__init__.cpython-36.pyc differ
-Binary files plugins_old/python/__pycache__/pyconfig.cpython-36.pyc and plugins/python/__pycache__/pyconfig.cpython-36.pyc differ
-Binary files plugins_old/python/__pycache__/python.cpython-36.pyc and plugins/python/__pycache__/python.cpython-36.pyc differ
-diff -ruN plugins_old/qt5.py plugins/qt5.py
---- plugins_old/qt5.py	2019-03-22 23:07:26.000000000 +0100
-+++ plugins/qt5.py	2019-09-19 10:26:18.021169265 +0200
+Binary files pyqtdeploy_old/sysroot/plugins/python/__pycache__/configure_python.cpython-36.pyc and pyqtdeploy/sysroot/plugins/python/__pycache__/configure_python.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/python/__pycache__/__init__.cpython-36.pyc and pyqtdeploy/sysroot/plugins/python/__pycache__/__init__.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/python/__pycache__/pyconfig.cpython-36.pyc and pyqtdeploy/sysroot/plugins/python/__pycache__/pyconfig.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/plugins/python/__pycache__/python.cpython-36.pyc and pyqtdeploy/sysroot/plugins/python/__pycache__/python.cpython-36.pyc differ
+diff -ruN pyqtdeploy_old/sysroot/plugins/qt5.py pyqtdeploy/sysroot/plugins/qt5.py
+--- pyqtdeploy_old/sysroot/plugins/qt5.py	2019-03-22 23:07:26.000000000 +0100
++++ pyqtdeploy/sysroot/plugins/qt5.py	2019-09-19 10:26:18.021169265 +0200
 @@ -3,14 +3,14 @@
  #
  # Redistribution and use in source and binary forms, with or without
@@ -122,9 +186,9 @@ diff -ruN plugins_old/qt5.py plugins/qt5.py
          sysroot.run(sysroot.host_make, 'install')
  
          if original_path is not None:
-diff -ruN plugins_old/sip.py plugins/sip.py
---- plugins_old/sip.py	2019-03-22 23:07:26.000000000 +0100
-+++ plugins/sip.py	2019-09-19 11:05:44.229153959 +0200
+diff -ruN pyqtdeploy_old/sysroot/plugins/sip.py pyqtdeploy/sysroot/plugins/sip.py
+--- pyqtdeploy_old/sysroot/plugins/sip.py	2019-03-22 23:07:26.000000000 +0100
++++ pyqtdeploy/sysroot/plugins/sip.py	2019-09-19 11:05:44.229153959 +0200
 @@ -3,14 +3,14 @@
  #
  # Redistribution and use in source and binary forms, with or without
@@ -159,9 +223,9 @@ diff -ruN plugins_old/sip.py plugins/sip.py
 -        sysroot.run(sysroot.host_make)
 +        sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
          sysroot.run(sysroot.host_make, 'install')
-diff -ruN plugins_old/zlib.py plugins/zlib.py
---- plugins_old/zlib.py	2019-03-22 23:07:26.000000000 +0100
-+++ plugins/zlib.py	2019-09-19 10:25:58.385044913 +0200
+diff -ruN pyqtdeploy_old/sysroot/plugins/zlib.py pyqtdeploy/sysroot/plugins/zlib.py
+--- pyqtdeploy_old/sysroot/plugins/zlib.py	2019-03-22 23:07:26.000000000 +0100
++++ pyqtdeploy/sysroot/plugins/zlib.py	2019-09-19 10:25:58.385044913 +0200
 @@ -3,14 +3,14 @@
  #
  # Redistribution and use in source and binary forms, with or without
@@ -197,3 +261,28 @@ diff -ruN plugins_old/zlib.py plugins/zlib.py
              sysroot.run(sysroot.host_make, 'install')
  
              if sysroot.target_platform_name == 'ios':
+Binary files pyqtdeploy_old/sysroot/__pycache__/component.cpython-36.pyc and pyqtdeploy/sysroot/__pycache__/component.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/__pycache__/__init__.cpython-36.pyc and pyqtdeploy/sysroot/__pycache__/__init__.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/__pycache__/specification.cpython-36.pyc and pyqtdeploy/sysroot/__pycache__/specification.cpython-36.pyc differ
+Binary files pyqtdeploy_old/sysroot/__pycache__/sysroot.cpython-36.pyc and pyqtdeploy/sysroot/__pycache__/sysroot.cpython-36.pyc differ
+diff -ruN pyqtdeploy_old/sysroot/sysroot.py pyqtdeploy/sysroot/sysroot.py
+--- pyqtdeploy_old/sysroot/sysroot.py	2019-03-22 23:07:26.000000000 +0100
++++ pyqtdeploy/sysroot/sysroot.py	2019-09-19 10:25:44.284956644 +0200
+@@ -3,14 +3,14 @@
+ #
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are met:
+-# 
++#
+ # 1. Redistributions of source code must retain the above copyright notice,
+ #    this list of conditions and the following disclaimer.
+-# 
++#
+ # 2. Redistributions in binary form must reproduce the above copyright notice,
+ #    this list of conditions and the following disclaimer in the documentation
+ #    and/or other materials provided with the distribution.
+-# 
++#
+ # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
