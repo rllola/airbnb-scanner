@@ -18,4 +18,12 @@ uninstall:
 init:
 	python build.py
 
-.PHONY: build clean install uninstall
+clean-sysroot:
+	rm *.tar.gz
+	rm *.tar.xz
+	rm -rf sysroot-linux-64
+
+download:
+	./scripts/download_libraries.sh
+
+.PHONY: build clean install uninstall init clean-sysroot download

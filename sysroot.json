@@ -12,7 +12,7 @@
     },
 
     "qt5": {
-        "linux|macos|win#source":   "qt-everywhere-src-5.12.2.tar.xz",
+        "linux|macos|win#source":   "qt-everywhere-src-5.14.1.tar.xz",
         "edition":                  "opensource",
 
         "linux#ssl":        "openssl-runtime",
@@ -43,7 +43,7 @@
 
     "sip": {
         "module_name":  "PyQt5.sip",
-        "source":       "sip-4.19.15.tar.gz"
+        "source":       "sip-4.19.18.tar.gz"
     },
 
     "pyqt5": {
@@ -60,6 +60,6 @@
                 "QtCore", "QtGui", "QtWidgets", "QtWinExtras"
         ],
 
-        "source": "PyQt5_*-5.12.1.tar.gz"
+        "source": "PyQt5-5.14.1.tar.gz"
     }
 }
