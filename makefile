@@ -9,4 +9,13 @@ clean:
 	rm -rf pkg-debian/usr/share/AirbnbScanner
 	rm *.deb
 
-.PHONY: build clean
+install:
+	sudo dpkg -i AirbnbScanner_test_i386.deb
+
+uninstall:
+	sudo dpkg -r airbnbscanner
+
+init:
+	python build.py
+
+.PHONY: build clean install uninstall
