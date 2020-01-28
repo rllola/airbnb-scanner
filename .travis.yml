@@ -33,12 +33,11 @@ matrix:
 install:
   - ./scripts/download_libraries.sh
   - pip3 install -q setuptools pyqtdeploy
-  - ls /home/travis/.local/lib/python3.5/site-packages
   - patch -ruN -d /home/travis/.local/lib/python3.5/site-packages/pyqtdeploy/sysroot/plugins < faster.patch
   - pip3 install -q -r requirements.txt
 script:
   #- python3 build.py --verbose
-  - pyqtdeploy-sysroot --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
+  - travis_wait 49 pyqtdeploy-sysroot --target linux-64 --sysroot sysroot-linux-64 sysroot.json
 
 deploy:
   provider: releases
