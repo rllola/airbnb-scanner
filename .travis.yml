@@ -32,8 +32,7 @@ matrix:
 
 install:
   - ./scripts/download_libraries.sh
-  - pip3 install -q setuptools pyqtdeploy
-  - updatedb
+  - pip3 install --verbose setuptools pyqtdeploy
   - locate pyqtdeploy
   - ls /home/travis/.local/lib
   - patch -ruN -d /home/travis/.local/lib/python3.7/site-packages/pyqtdeploy/sysroot/plugins < slang.patch
