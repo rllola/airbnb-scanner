@@ -33,7 +33,7 @@ matrix:
 install:
   - ./scripts/download_libraries.sh
   - pip3 install -q setuptools pyqtdeploy
-  - patch -ruN -d /home/travis/.local/lib/python3.5/site-packages/pyqtdeploy < faster.patch
+  - patch -p1 -ruN -d /home/travis/.local/lib/python3.5/site-packages/pyqtdeploy < faster.patch
   - pip3 install -q -r requirements.txt
 script:
   #- python3 build.py --verbose
