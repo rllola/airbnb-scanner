@@ -60,6 +60,7 @@ parser.add_argument('--quiet', help="disable progress messages",
 parser.add_argument('--verbose', help="enable verbose progress messages",
         action='store_true')
 parser.add_argument('--project', help="specify project file (the .pdy)", default="airbnb-scanner.pdy")
+
 cmd_line_args = parser.parse_args()
 build_sysroot = not cmd_line_args.no_sysroot
 installed_qt_dir = cmd_line_args.installed_qt_dir
@@ -67,6 +68,7 @@ source_dirs = cmd_line_args.source_dirs
 target = cmd_line_args.target
 quiet = cmd_line_args.quiet
 verbose = cmd_line_args.verbose
+project = cmd_line_args.project
 
 # Pick a default target if none is specified.
 if not target:
@@ -133,7 +135,7 @@ if build_sysroot:
     run(args)
 
 run(['pyqtdeploy-build', '--target', target, '--sysroot', sysroot_dir,
-            '--build-dir', build_dir, 'airbnb-scanner.pdy'])
+            '--build-dir', build_dir, project])
 
 # Run qmake.  Use the qmake left by pyqtdeploy-sysroot.
 os.chdir(build_dir)
