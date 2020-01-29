@@ -1,33 +1,3 @@
-diff -ruN -x '*.pyc' pyqtdeploy_old/message_handler.py pyqtdeploy/message_handler.py
---- pyqtdeploy_old/message_handler.py	2019-03-22 23:07:25.000000000 +0100
-+++ pyqtdeploy/message_handler.py	2020-01-28 22:40:42.707685148 +0100
-@@ -3,14 +3,14 @@
- #
- # Redistribution and use in source and binary forms, with or without
- # modification, are permitted provided that the following conditions are met:
--# 
-+#
- # 1. Redistributions of source code must retain the above copyright notice,
- #    this list of conditions and the following disclaimer.
--# 
-+#
- # 2. Redistributions in binary form must reproduce the above copyright notice,
- #    this list of conditions and the following disclaimer in the documentation
- #    and/or other materials provided with the distribution.
--# 
-+#
- # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-@@ -59,7 +59,7 @@
-         message to somewhere other that stdout.
-         """
- 
--        print(message, flush=True)
-+        print(message[0:64], flush=True)
- 
-     @classmethod
-     def error(cls, message):
 diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/plugins/pyqt5.py pyqtdeploy/sysroot/plugins/pyqt5.py
 --- pyqtdeploy_old/sysroot/plugins/pyqt5.py	2019-03-22 23:07:25.000000000 +0100
 +++ pyqtdeploy/sysroot/plugins/pyqt5.py	2019-09-19 10:26:57.637424739 +0200
@@ -35,36 +5,36 @@ diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/plugins/pyqt5.py pyqtdeploy/sysroot/
  #
  # Redistribution and use in source and binary forms, with or without
  # modification, are permitted provided that the following conditions are met:
--# 
+-#
 +#
  # 1. Redistributions of source code must retain the above copyright notice,
  #    this list of conditions and the following disclaimer.
--# 
+-#
 +#
  # 2. Redistributions in binary form must reproduce the above copyright notice,
  #    this list of conditions and the following disclaimer in the documentation
  #    and/or other materials provided with the distribution.
--# 
+-#
 +#
  # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 @@ -28,6 +28,7 @@
- 
+
  from ... import ComponentBase, ComponentOption
- 
+
 +import multiprocessing
- 
+
  class PyQt5Component(ComponentBase):
      """ The PyQt5 component. """
 @@ -93,7 +94,7 @@
              args.append('--verbose')
- 
+
          sysroot.run(*args)
 -        sysroot.run(sysroot.host_make)
 +        sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
          sysroot.run(sysroot.host_make, 'install')
- 
+
      def configure(self, sysroot):
 diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/plugins/pyqtwebengine.py pyqtdeploy/sysroot/plugins/pyqtwebengine.py
 --- pyqtdeploy_old/sysroot/plugins/pyqtwebengine.py	2019-03-22 23:07:25.000000000 +0100
@@ -73,28 +43,28 @@ diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/plugins/pyqtwebengine.py pyqtdeploy/
  #
  # Redistribution and use in source and binary forms, with or without
  # modification, are permitted provided that the following conditions are met:
--# 
+-#
 +#
  # 1. Redistributions of source code must retain the above copyright notice,
  #    this list of conditions and the following disclaimer.
--# 
+-#
 +#
  # 2. Redistributions in binary form must reproduce the above copyright notice,
  #    this list of conditions and the following disclaimer in the documentation
  #    and/or other materials provided with the distribution.
--# 
+-#
 +#
  # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 @@ -92,7 +92,7 @@
              args.append('--verbose')
- 
+
          sysroot.run(*args)
 -        sysroot.run(sysroot.host_make)
 +        sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
          sysroot.run(sysroot.host_make, 'install')
- 
+
      def configure(self, sysroot):
 diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/plugins/qt5.py pyqtdeploy/sysroot/plugins/qt5.py
 --- pyqtdeploy_old/sysroot/plugins/qt5.py	2019-03-22 23:07:26.000000000 +0100
@@ -103,36 +73,36 @@ diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/plugins/qt5.py pyqtdeploy/sysroot/pl
  #
  # Redistribution and use in source and binary forms, with or without
  # modification, are permitted provided that the following conditions are met:
--# 
+-#
 +#
  # 1. Redistributions of source code must retain the above copyright notice,
  #    this list of conditions and the following disclaimer.
--# 
+-#
 +#
  # 2. Redistributions in binary form must reproduce the above copyright notice,
  #    this list of conditions and the following disclaimer in the documentation
  #    and/or other materials provided with the distribution.
--# 
+-#
 +#
  # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 @@ -29,6 +29,7 @@
- 
+
  from ... import ComponentBase, ComponentOption
- 
+
 +import multiprocessing
- 
+
  class Qt5Component(ComponentBase):
      """ The Qt5 component. """
 @@ -239,7 +240,7 @@
              args.append('-qt-xcb')
- 
+
          sysroot.run(*args)
 -        sysroot.run(sysroot.host_make)
 +        sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
          sysroot.run(sysroot.host_make, 'install')
- 
+
          if original_path is not None:
 diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/plugins/sip.py pyqtdeploy/sysroot/plugins/sip.py
 --- pyqtdeploy_old/sysroot/plugins/sip.py	2019-03-22 23:07:26.000000000 +0100
@@ -141,31 +111,31 @@ diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/plugins/sip.py pyqtdeploy/sysroot/pl
  #
  # Redistribution and use in source and binary forms, with or without
  # modification, are permitted provided that the following conditions are met:
--# 
+-#
 +#
  # 1. Redistributions of source code must retain the above copyright notice,
  #    this list of conditions and the following disclaimer.
--# 
+-#
 +#
  # 2. Redistributions in binary form must reproduce the above copyright notice,
  #    this list of conditions and the following disclaimer in the documentation
  #    and/or other materials provided with the distribution.
--# 
+-#
 +#
  # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 @@ -28,6 +28,8 @@
- 
+
  from ... import ComponentBase, ComponentOption
- 
+
 +import multiprocessing
 +
- 
+
  class SIPComponent(ComponentBase):
      """ The SIP component. """
 @@ -118,5 +120,5 @@
- 
+
          sysroot.run(*args)
          sysroot.run(sysroot.host_qmake)
 -        sysroot.run(sysroot.host_make)
@@ -178,36 +148,36 @@ diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/plugins/zlib.py pyqtdeploy/sysroot/p
  #
  # Redistribution and use in source and binary forms, with or without
  # modification, are permitted provided that the following conditions are met:
--# 
+-#
 +#
  # 1. Redistributions of source code must retain the above copyright notice,
  #    this list of conditions and the following disclaimer.
--# 
+-#
 +#
  # 2. Redistributions in binary form must reproduce the above copyright notice,
  #    this list of conditions and the following disclaimer in the documentation
  #    and/or other materials provided with the distribution.
--# 
+-#
 +#
  # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 @@ -28,6 +28,7 @@
- 
+
  from ... import ComponentBase, ComponentOption
- 
+
 +import multiprocessing
- 
+
  class zlibComponent(ComponentBase):
      """ The zlib component. """
 @@ -92,7 +93,7 @@
- 
+
              sysroot.run('./configure', '--static',
                      '--prefix=' + sysroot.sysroot_dir)
 -            sysroot.run(sysroot.host_make)
 +            sysroot.run(sysroot.host_make, '-j' + str(multiprocessing.cpu_count()))
              sysroot.run(sysroot.host_make, 'install')
- 
+
              if sysroot.target_platform_name == 'ios':
 diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/sysroot.py pyqtdeploy/sysroot/sysroot.py
 --- pyqtdeploy_old/sysroot/sysroot.py	2019-03-22 23:07:26.000000000 +0100
@@ -216,16 +186,16 @@ diff -ruN -x '*.pyc' pyqtdeploy_old/sysroot/sysroot.py pyqtdeploy/sysroot/sysroo
  #
  # Redistribution and use in source and binary forms, with or without
  # modification, are permitted provided that the following conditions are met:
--# 
+-#
 +#
  # 1. Redistributions of source code must retain the above copyright notice,
  #    this list of conditions and the following disclaimer.
--# 
+-#
 +#
  # 2. Redistributions in binary form must reproduce the above copyright notice,
  #    this list of conditions and the following disclaimer in the documentation
  #    and/or other materials provided with the distribution.
--# 
+-#
 +#
  # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
