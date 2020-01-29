@@ -38,12 +38,14 @@ matrix:
 
 install:
   - ./scripts/download_libraries.sh
+  - pip3 install virtualenv
+  - virtualenv --python=/opt/pyenv/shims/python3 venv
+  - source venv/bin/activate
   - pip3 install setuptools pyqtdeploy
   - pip3 install -r requirements.txt
   - which python
-  - which python3
 script:
-  - python3 build.py --installed-qt-dir /opt/qt514 --verbose
+  - python build.py --installed-qt-dir /opt/qt514 --verbose
   #- pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
 
 deploy:
