@@ -35,9 +35,8 @@ matrix:
 
 install:
   - ./scripts/download_libraries.sh
-  - pip3 install -q setuptools pyqtdeploy
-  - patch -p1 -ruN -d /home/travis/.local/lib/python3.6/site-packages/pyqtdeploy < faster.patch
-  - pip3 install -q -r requirements.txt
+  - pip3 install setuptools pyqtdeploy
+  - pip3 install -r requirements.txt
 script:
   #- python3 build.py --verbose
   - pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
