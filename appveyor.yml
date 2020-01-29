@@ -30,10 +30,10 @@ install:
   - venv\Scripts\activate
   - pip install pyqtdeploy
   - pip install -r requirements.txt
-  - cmd: dir C:\Qt
+  - cmd: dir C:\Qt\5.14\msvc2017_64
 
 test_script:
-  - python build.py --installed-qt-dir "C:\Qt\5.14.0" --verbose
+  - python build.py --installed-qt-dir C:\Qt\5.14\msvc2017_64 --verbose
 
 after_test:
   - ps: $size = [math]::floor((Get-ChildItem dist\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
