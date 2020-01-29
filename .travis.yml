@@ -10,11 +10,7 @@ matrix:
         before_install:
           - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.14.0-bionic
           - sudo apt-get build-dep qt5-default
-          - sudo apt-get install -y libxcb-xinerama0-dev python3-pip libffi-dev \
-            libgl1-mesa-glx libnss3 libxcomposite-dev libxcursor-dev libxi6 libxtst6 \
-            libasound2 libegl1-mesa libxkbcommon-x11-0 libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev \
-            libx11-xcb-dev libxcb-glx0-dev libxkbcommon-x11-dev qt514-meta-minimal qt514x11extras
+          - sudo apt-get install -y libxcb-xinerama0-dev python3-pip libffi-dev libgl1-mesa-glx libnss3 libxcomposite-dev libxcursor-dev libxi6 libxtst6 libasound2 libegl1-mesa libxkbcommon-x11-0 libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libx11-xcb-dev libxcb-glx0-dev libxkbcommon-x11-dev qt514-meta-minimal qt514x11extras
           - sudo chmod +x /opt/qt514/bin/qt514-env.sh
           - /opt/qt514/bin/qt514-env.sh
           - export QT_QPA_PLATFORM=offscreen
