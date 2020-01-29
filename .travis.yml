@@ -14,6 +14,7 @@ matrix:
           - sudo chmod +x /opt/qt514/bin/qt514-env.sh
           - /opt/qt514/bin/qt514-env.sh
           - export QT_QPA_PLATFORM=offscreen
+          - export QT_DIR=/opt/qt514
         before_deploy:
           - ./scripts/generate_deb_files.sh
           - export FILE=AirbnbScanner_${TRAVIS_TAG}_i386.deb
@@ -26,7 +27,7 @@ matrix:
         sudo: true
         before_install:
           - brew install qt5
-          - echo $(brew --prefix qt)
+          - export QT_DIR=$(brew --prefix qt)
         before_deploy:
           - nvm install --lts
           - nvm use --lts
@@ -45,7 +46,7 @@ install:
   - pip install -r requirements.txt
   - which python
 script:
-  - python build.py --installed-qt-dir /opt/qt514 --verbose --project airbnb-scanner.travis.pdy
+  - python build.py --installed-qt-dir ${QT_DIR} --verbose --project airbnb-scanner.travis.pdy
   #- pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
 
 deploy:
