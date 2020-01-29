@@ -43,7 +43,7 @@ install:
   - which python
   - which python3
 script:
-  - python build.py --installed-qt-dir /opt/qt514 --verbose
+  - python3 build.py --installed-qt-dir /opt/qt514 --verbose
   #- pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
 
 deploy:
