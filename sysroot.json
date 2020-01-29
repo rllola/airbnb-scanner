@@ -12,7 +12,8 @@
     },
 
     "qt5": {
-        "linux|macos|win#qt_dir":        ".",
+        "linux|macos#qt_dir":       ".",
+        "win#qt_dir":               "C:\Qt\5.14.0\msvc2017_64",
 
         "edition":                  "opensource",
 
