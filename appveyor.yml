@@ -30,6 +30,7 @@ install:
   - venv\Scripts\activate
   - pip install pyqtdeploy
   - pip install -r requirements.txt
+  - cmd: dir C:\Qt\5.14.0\msvc2017_64\bin
 
 test_script:
   - python build.py --installed-qt-dir "C:\Qt\5.14.0" --verbose
