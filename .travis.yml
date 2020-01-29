@@ -26,7 +26,6 @@ matrix:
         env: TOXENV=py37
         sudo: true
         before_install:
-          - brew install qt5
           - brew upgrade qt
           - export QT_DIR=$(brew --prefix qt)
         before_deploy:
