@@ -45,7 +45,7 @@ install:
   - pip install -r requirements.txt
   - which python
 script:
-  - python build.py --installed-qt-dir /opt/qt514 --verbose
+  - python build.py --installed-qt-dir /opt/qt514 --verbose --project airbnb-scanner.travis.pdy
   #- pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
 
 deploy:

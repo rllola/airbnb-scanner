@@ -59,6 +59,7 @@ parser.add_argument('--quiet', help="disable progress messages",
         action='store_true')
 parser.add_argument('--verbose', help="enable verbose progress messages",
         action='store_true')
+parser.add_argument('--project', help="specify project file (the .pdy)", default="airbnb-scanner.pdy")
 cmd_line_args = parser.parse_args()
 build_sysroot = not cmd_line_args.no_sysroot
 installed_qt_dir = cmd_line_args.installed_qt_dir
