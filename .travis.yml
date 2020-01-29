@@ -29,9 +29,6 @@ matrix:
           - brew install qt5
           - brew upgrade qt
           - export QT_DIR=$(brew --prefix qt)
-          - pip3 install virtualenv
-          - virtualenv --python=$(which python3) venv
-          - source venv/bin/activate
         before_deploy:
           - nvm install --lts
           - nvm use --lts
@@ -43,11 +40,14 @@ matrix:
 
 install:
   - ./scripts/download_libraries.sh
+  - pip3 install virtualenv
+  - virtualenv --python=$(which python3.7) venv
+  - source venv/bin/activate
   - pip install setuptools pyqtdeploy
   - pip install -r requirements.txt
   - which python
 script:
-  - python build.py --installed-qt-dir ${QT_DIR} --verbose --project airbnb-scanner.travis.pdy
+  - python build.py --installed-qt-dir ${QT_DIR} --verbose
   #- pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
 
 deploy:
