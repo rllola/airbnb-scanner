@@ -27,6 +27,7 @@ matrix:
         sudo: true
         before_install:
           - brew install qt5
+          - brew upgrade qt
           - export QT_DIR=$(brew --prefix qt)
           - pip3 install virtualenv
           - virtualenv --python=$(which python3) venv
