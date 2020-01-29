@@ -26,6 +26,8 @@ matrix:
         env: TOXENV=py37
         sudo: true
         before_install:
+          # Because of the python EOL (https://discuss.circleci.com/t/brew-link-step-failing-on-python-dependency/33925/8)
+          - export HOMEBREW_NO_AUTO_UPDATE=1
           - brew upgrade qt
           - export QT_DIR=$(brew --prefix qt)
         before_deploy:
