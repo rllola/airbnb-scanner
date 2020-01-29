@@ -29,7 +29,6 @@ matrix:
           # Because of the python EOL (https://discuss.circleci.com/t/brew-link-step-failing-on-python-dependency/33925/8)
           #- export HOMEBREW_NO_INSTALL_CLEANUP=1
           - brew update
-          - brew upgrade
           - brew prune
           #- brew link --overwrite python
           #- brew unlink python@2
