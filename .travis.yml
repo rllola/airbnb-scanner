@@ -42,8 +42,8 @@ install:
   #- pip3 install virtualenv
   #- virtualenv --python=/opt/pyenv/shims/python3 venv
   #- source venv/bin/activate
-  - pip install setuptools pyqtdeploy
-  - pip install -r requirements.txt
+  - pip3 install setuptools pyqtdeploy
+  - pip3 install -r requirements.txt
   - which python
 script:
   - python build.py --installed-qt-dir ${QT_DIR} --verbose --project airbnb-scanner.travis.pdy
