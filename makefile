@@ -16,6 +16,14 @@ uninstall:
 	sudo dpkg -r airbnbscanner
 
 init:
-	python build.py
+	pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
 
-.PHONY: build clean install uninstall
+clean-sysroot:
+	rm *.tar.gz
+	rm *.tar.xz
+	rm -rf sysroot-linux-64
+
+download:
+	./scripts/download_libraries.sh
+
+.PHONY: build clean install uninstall init clean-sysroot download
