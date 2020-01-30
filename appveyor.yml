@@ -34,9 +34,10 @@ install:
 
 test_script:
   - python build.py --installed-qt-dir C:\Qt\5.13\msvc2017_64 --verbose --project airbnb-scanner.win.pdy
+  - cmd: dir build-win-64\AirbnbScanner\
 
 after_test:
-  - ps: $size = [math]::floor((Get-ChildItem dist\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
+  - ps: $size = [math]::floor((Get-ChildItem build-win-64\AirbnbScanner\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
   - ps: if ($env:APPVEYOR_REPO_TAG_NAME) { $tag = $env:APPVEYOR_REPO_TAG_NAME } else { $tag="v0.0.0" }
   - ps: $major, $minor, $build = $tag.substring(1).split(".")
   - ps: makensis.exe /DTAG=$tag /DSIZE=$size /DMAJOR=$major /DMINOR=$minor /DBUILD=$build airbnbscanner.nsi
