@@ -35,9 +35,11 @@ matrix:
           - nvm install --lts
           - nvm use --lts
           - npm install -g create-dmg
-          - cd build-macos-64/AirbnbScanner
+          - cp build-macos-64/AirbnbScanner pkg-macos/AirbnbScanner.app/Contents/MacOS/
+          - cd pkg-macos/
           - export FILE=AirbnbScanner_${TRAVIS_TAG}.dmg
           - create-dmg 'AirbnbScanner.app' || true
+          - ls
           - mv AirbnbScanner\ ${TRAVIS_TAG/v}.dmg $FILE
 
 install:
@@ -57,6 +59,7 @@ script:
   - cp build-macos-64/AirbnbScanner pkg-macos/AirbnbScanner.app/Contents/MacOS/
   - cd pkg-macos/
   - create-dmg 'AirbnbScanner.app' || true
+  - ls
   #- pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
 
 deploy:
