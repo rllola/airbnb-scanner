@@ -34,7 +34,7 @@ install:
 
 test_script:
   - python build.py --installed-qt-dir C:\Qt\5.13\msvc2017_64 --verbose --project airbnb-scanner.win.pdy
-  - cmd: dir build-win-64\AirbnbScanner\
+  - cmd: dir build-win-64\
 
 after_test:
   - ps: $size = [math]::floor((Get-ChildItem build-win-64\AirbnbScanner\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
