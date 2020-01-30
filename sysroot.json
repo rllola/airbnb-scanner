@@ -44,7 +44,8 @@
 
     "sip": {
         "module_name":  "PyQt5.sip",
-        "source":       "sip-4.19.20.tar.gz"
+        "linux|macos#source":       "sip-4.19.20.tar.gz",
+        "win#source":               "sip-4.19.20.zip"
     },
 
     "pyqt5": {
@@ -61,6 +62,7 @@
                 "QtCore", "QtGui", "QtWidgets", "QtWinExtras"
         ],
 
-        "source": "PyQt5-5.14.1.tar.gz"
+        "linux|macos#source": "PyQt5-5.14.1.tar.gz",
+        "win#source": "PyQt5-5.13.2.zip"
     }
 }
