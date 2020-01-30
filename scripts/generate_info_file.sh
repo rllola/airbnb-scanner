@@ -1,3 +1,7 @@
+#!/bin/bash
+
+echo "====== GENERATE INFO.PLIST FILE ======"
+cat > $PWD/pkg-macos/AirbnbScanner.app/Contents/Info.plist << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -17,8 +21,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.4</string>
+	<string>${TRAVIS_TAG/v}</string>
 	<key>LSBackgroundOnly</key>
 	<true/>
 </dict>
 </plist>
+EOF

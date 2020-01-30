@@ -32,6 +32,7 @@ matrix:
           - brew upgrade qt
           - export QT_DIR=$(brew --prefix qt)
         before_deploy:
+          - ./scripts/generate_info_file.sh
           - nvm install --lts
           - nvm use --lts
           - npm install -g create-dmg
@@ -39,7 +40,6 @@ matrix:
           - cd pkg-macos/
           - export FILE=AirbnbScanner_${TRAVIS_TAG}.dmg
           - create-dmg 'AirbnbScanner.app' || true
-          - ls
           - mv AirbnbScanner\ ${TRAVIS_TAG/v}.dmg $FILE
 
 install:
@@ -52,14 +52,6 @@ install:
   - which python
 script:
   - python build.py --installed-qt-dir ${QT_DIR} --verbose
-  - ls -F build-macos-64/
-  - nvm install --lts
-  - nvm use --lts
-  - npm install -g create-dmg
-  - cp build-macos-64/AirbnbScanner pkg-macos/AirbnbScanner.app/Contents/MacOS/
-  - cd pkg-macos/
-  - create-dmg 'AirbnbScanner.app' || true
-  - ls
   #- pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
 
 deploy:
