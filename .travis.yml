@@ -54,7 +54,7 @@ script:
   - nvm install --lts
   - nvm use --lts
   - npm install -g create-dmg
-  - cp build-macos-64/AirbnbScanner pkg-macos/MacOS/
+  - cp build-macos-64/AirbnbScanner pkg-macos/AirbnbScanner.app/MacOS/
   - cd pkg-macos/
   - create-dmg 'AirbnbScanner.app' || true
   #- pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
