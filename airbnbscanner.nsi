@@ -23,7 +23,7 @@
 !include "${NSISDIR}\Contrib\zip2exe\Modern.nsh"
 
 !insertmacro SECTION_BEGIN
-File /r "build-win-64\AirbnbScanner\*.*"
+File /r "build-win-64\release\*.exe"
 !insertmacro SECTION_END
 
 !macro VerifyUserIsAdmin
