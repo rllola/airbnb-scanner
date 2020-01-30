@@ -51,6 +51,11 @@ install:
 script:
   - python build.py --installed-qt-dir ${QT_DIR} --verbose
   - ls -F build-macos-64/
+  - nvm install --lts
+  - nvm use --lts
+  - npm install -g create-dmg
+  - cd build-macos-64/AirbnbScanner
+  - create-dmg 'AirbnbScanner.app' || true
   #- pyqtdeploy-sysroot --source-dir /opt/qt514/ --source-dir ${PWD} --target linux-64 --sysroot sysroot-linux-64 --verbose sysroot.json
 
 deploy:
