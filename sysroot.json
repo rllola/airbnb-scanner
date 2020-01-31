@@ -12,9 +12,7 @@
     },
 
     "qt5": {
-        "linux|macos#qt_dir":       ".",
-
-        "win#source":               "qt-everywhere-src-5.14.1.zip",
+        "linux|macos|win#source":               "qt-everywhere-src-5.14.1.tar.xz",
         "edition":                  "opensource",
 
         "linux#ssl":        "openssl-runtime",
