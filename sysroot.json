@@ -12,8 +12,8 @@
     },
 
     "qt5": {
-        "linux|macos|win#qt_dir":       ".",
-        
+        "linux|macos#qt_dir":       ".",
+
         "win#source":               "qt-everywhere-src-5.14.1.tar.xz",
         "edition":                  "opensource",
 
