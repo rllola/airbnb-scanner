@@ -23,6 +23,7 @@ init:
 install:
   - curl -LO https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
   - curl -LO https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
+  - curl -LO http://download.qt.io/official_releases/qt/5.14/5.14.1/single/qt-everywhere-src-5.14.1.tar.xz
   - curl -LO https://www.riverbankcomputing.com/static/Downloads/sip/4.19.20/sip-4.19.20.zip
   - curl -LO https://www.riverbankcomputing.com/static/Downloads/PyQt5/5.13.2/PyQt5-5.13.2.zip
   - curl -LO https://ftp.openssl.org/source/old/1.1.0/openssl-1.1.0j.tar.gz
@@ -33,7 +34,7 @@ install:
   - cmd: dir venv\Lib\site-packages
 
 test_script:
-  - python build.py --installed-qt-dir C:\Qt\5.13\msvc2017_64 --verbose --project airbnb-scanner.win.pdy
+  - python build.py --verbose --project airbnb-scanner.win.pdy
   - cmd: dir build-win-64\release
 
 after_test:
