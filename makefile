@@ -1,8 +1,15 @@
 build:
 	python build.py --no-sysroot
-	mkdir pkg-debian/usr/share/AirbnbScanner
+	mkdir -p pkg-debian/usr/share/AirbnbScanner
 	cp build-linux-64/AirbnbScanner pkg-debian/usr/share/AirbnbScanner/AirbnbScanner
 	dpkg -b pkg-debian AirbnbScanner_test_i386.deb
+
+release:
+	python build.py --no-sysroot
+	./scripts/generate_deb_files.sh $(TAG)
+	mkdir -p pkg-debian/usr/share/AirbnbScanner
+	cp build-linux-64/AirbnbScanner pkg-debian/usr/share/AirbnbScanner/AirbnbScanner
+	dpkg -b pkg-debian AirbnbScanner_$(TAG)_i386.deb
 
 clean:
 	rm -rf build-*/
@@ -10,7 +17,7 @@ clean:
 	rm *.deb
 
 install:
-	sudo dpkg -i AirbnbScanner_test_i386.deb
+	sudo dpkg -i AirbnbScanner_$(TAG)_i386.deb
 
 uninstall:
 	sudo dpkg -r airbnbscanner
