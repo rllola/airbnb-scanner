@@ -2,6 +2,14 @@
 
 Python app that scan for cameras.
 
+## Screenshots
+
+![Application screenshot](./screenshots/screenshot-airbnb-scanner-2.png "Boo")
+
+Note: Show you device's company name but doesn't warn you yet about possible recording devices.
+
+Here : Mi Home Security Camera 360° 1080P by Xiaomi.
+
 ## Dev
 
 ```
