@@ -26,6 +26,8 @@ class Application(QApplication):
         if ":/" in sys.path:
             prefix_path = ":"
 
+        # FIXME: Detect Dark/Light mode
+        # BODY: Pick light or dark icon to fit contrast and make it visible on different theme
         self.icon = QIcon(os.path.join(prefix_path,"icons","spy-light.png"))
 
         # Create the tray

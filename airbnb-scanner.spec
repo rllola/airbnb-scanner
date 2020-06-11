@@ -22,11 +22,6 @@ a = Analysis(['src/main.py'],
              noarchive=False)
 
 icon = None
-if platform.startswith("darwin"):
-  icon = os.path.join("icons","spy.icns")
-
-if platform.startswith("win"):
-  icon = os.path.join("icons","spy.ico")
 
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
@@ -51,17 +46,3 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                name='AirbnbScanner')
-
-version = '0.0.0'
-
-if os.environ.get('TRAVIS_TAG'):
-    version = os.environ['TRAVIS_TAG'][1:]
-
-app = BUNDLE(coll,
-  name='AirbnbScanner.app',
-  icon=icon,
-  bundle_identifier=None,
-  info_plist={
-    'CFBundleVersion': version,
-    'CFBundleShortVersionString': version
-  })
