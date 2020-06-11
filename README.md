@@ -2,50 +2,70 @@
 
 Python app that scan for cameras.
 
+## Screenshots
+
+![Application screenshot](./screenshots/screenshot-airbnb-scanner-2.png "Boo")
+
+Note: Show you device's company name but doesn't warn you yet about possible recording devices.
+
+Here : Mi Home Security Camera 360° 1080P by Xiaomi.
+
 ## Dev
 
 ### With Virtualenv (Recommended)
 
-#### Windows
+Call it `venv` really important!
 
 ```
-$ virtualenv.exe .venv
-$ .venv\Scripts\activate.bat
+$ virtualenv venv -p $(which python3.7) --always-copy
+$ source venv\bin\activate
 ```
 
-https://scapy.readthedocs.io/en/latest/installation.html#windows
-
-#### Posix systems
 
 ```
-$ virtualenv .venv
-* source .venv\bin\activate
-```
-
-### Install dependencies
-
-```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 ## Notes
 
-### Scapy on linux
-
-Scapy root privileges needed.
+### Scapy root privileges needed
 
 https://stackoverflow.com/questions/20763039/creating-raw-socket-in-python-without-root-privileges
 
 https://stackoverflow.com/questions/36215201/python-scapy-sniff-without-root
 
 ```
-setcap cap_net_raw=eip .venv/bin/python3.6
+$ setcap cap_net_raw=eip venv/bin/python
 ```
 
 But also we need `$XDG_RUNTIME_DIR` to match the user folder so no root to see the tray icon.
 
-### PyQt5 5.13 + pyinstaller broken
+----
 
-https://github.com/pyinstaller/pyinstaller/issues/4293
+### Packaging with pyqtdeploy
 
-Temporarly fixed to version 5.12.2
+Error :
+```
+_ctypes.c:107:10: fatal error: ffi.h: No such file or directory
+```
+Answer :
+```
+sudo apt install libffi-dev
+```
+
+----
+
+### Release
+
+It takes too long to build in CI. Instead builds are being done locally on my computer (maybe for the best).
+```
+make release TAG=v0.x.x
+```
+
+Using semver standard.
+
+----
+
+### Linux libcrypto
+
+Requires `libssl1.1` for the latest version.

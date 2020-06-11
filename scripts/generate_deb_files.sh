@@ -1,9 +1,11 @@
 #!/bin/bash
 
+TAG=$1
+
 echo "====== GENERATE CONTROL FILE ======"
 cat > $PWD/pkg-debian/DEBIAN/control << EOF
 Package: AirbnbScanner
-Version: ${TRAVIS_TAG/v}
+Version: ${TAG/v}
 Architecture: all
 Essential: no
 Section: utils
@@ -17,13 +19,13 @@ mkdir -p $PWD/pkg-debian/usr/share/applications/
 echo "====== GENERATE .DESKTOP FILE ======"
 cat > $PWD/pkg-debian/usr/share/applications/airbnb-scanner.desktop << EOF
 [Desktop Entry]
-Version=${TRAVIS_TAG/v}
+Version=${TAG/v}
 Name=Airbnb Scanner
 Comment=Device scanner to get the camera in your Airbnb.
 Exec=AirbnbScanner %u
 Path=/usr/share/AirbnbScanner/
-Icon=/usr/share/AirbnbScanner/icons/spy.svg
-Terminal=true
+Icon=airbnbscanner
+Terminal=talse
 Type=Application
 Categories=Application;Network;
 EOF

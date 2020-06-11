@@ -1,0 +1,11 @@
+--- qt5-copy.py	2020-06-11 17:14:48.214534822 +0200
++++ qt5.py	2020-06-11 16:24:19.807841574 +0200
+@@ -239,7 +239,7 @@
+             args.append('-qt-xcb')
+ 
+         sysroot.run(*args)
+-        sysroot.run(sysroot.host_make)
++        sysroot.run(sysroot.host_make, '-j4')
+         sysroot.run(sysroot.host_make, 'install')
+ 
+         if original_path is not None:
