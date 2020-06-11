@@ -28,7 +28,7 @@ $ pip install -r requirements.txt
 
 ## Notes
 
-### Scapy root privileges needed.
+### Scapy root privileges needed
 
 https://stackoverflow.com/questions/20763039/creating-raw-socket-in-python-without-root-privileges
 
