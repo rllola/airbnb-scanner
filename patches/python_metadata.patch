@@ -1,0 +1,11 @@
+--- python_metadata.py	2020-06-11 18:06:30.641733410 +0200
++++ python_metadata-copy.py	2020-06-11 18:06:42.565853621 +0200
+@@ -4935,7 +4935,7 @@
+ 
+     'pyexpat':
+         ExtensionModule(internal=True,
+-                source=('expat/loadlibrary.c', 'expat/xmlparse.c',
++                source=('expat/xmlparse.c',
+                         'expat/xmlrole.c', 'expat/xmltok.c', 'pyexpat.c'),
+                 defines=('XML_STATIC', 'win#COMPILED_FROM_DSP',
+                         '!win#HAVE_EXPAT_CONFIG_H', '!win#XML_DEV_URANDOM'),

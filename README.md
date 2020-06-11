@@ -12,8 +12,18 @@ Here : Mi Home Security Camera 360° 1080P by Xiaomi.
 
 ## Dev
 
+### With Virtualenv (Recommended)
+
+Call it `venv` really important!
+
 ```
-pip install -r requirements.txt
+$ virtualenv venv -p $(which python3.7) --always-copy
+$ source venv\bin\activate
+```
+
+
+```
+$ pip install -r requirements.txt
 ```
 
 ## Notes
@@ -25,7 +35,7 @@ https://stackoverflow.com/questions/20763039/creating-raw-socket-in-python-witho
 https://stackoverflow.com/questions/36215201/python-scapy-sniff-without-root
 
 ```
-setcap cap_net_raw=eip venv/bin/python3.6
+$ setcap cap_net_raw=eip venv/bin/python
 ```
 
 But also we need `$XDG_RUNTIME_DIR` to match the user folder so no root to see the tray icon.
@@ -53,3 +63,9 @@ make release TAG=v0.x.x
 ```
 
 Using semver standard.
+
+----
+
+### Linux libcrypto
+
+Requires `libssl1.1` for the latest version.
