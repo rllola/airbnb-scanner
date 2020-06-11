@@ -49,6 +49,8 @@ class Application(QApplication):
 
         clients_list = []
 
+        # FIXME: Path for macaddress.io-db.json for dev
+        # BODY: If doing dev we need to specify the path using another method
         qf = QFile(data.__file__.replace("__init__.pyo", "macaddress.io-db.json"))
         qf.open(QIODevice.ReadOnly | QIODevice.Text)
         content = qf.readAll()
