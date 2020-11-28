@@ -3,6 +3,9 @@
 import sys
 import os
 
+# FIXME: Move main.py to src/
+# BODY: Move main.py file to source folder.
+
 from src.application import Application
 
 def main():
