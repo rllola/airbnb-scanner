@@ -17,6 +17,7 @@ class Application(QApplication):
 
         print("Creating menu...")
         self.menu = QMenu()
+        self.device_menu = QMenu("Devices")
         self.separator = self.menu.addSeparator()
         self.quitAction = self.menu.addAction("Quit")
         self.quitAction.triggered.connect(self.quit)
@@ -26,9 +27,13 @@ class Application(QApplication):
         if ":/" in sys.path:
             prefix_path = ":"
 
+        self.databaseFile = QFile(os.path.join(prefix_path,"data","macaddress.io-db.json"))
+
+
         # FIXME: Detect Dark/Light mode
         # BODY: Pick light or dark icon to fit contrast and make it visible on different theme
         self.icon = QIcon(os.path.join(prefix_path,"icons","spy-light.png"))
+        self.rescanIcon = QIcon(os.path.join(prefix_path,"icons","reload.png"))
 
         # Create the tray
         self.tray = QSystemTrayIcon(self.icon, None)
@@ -39,23 +44,26 @@ class Application(QApplication):
         # We are scanning local IP
         self.scan('192.168.1.0/24')
 
+    def rescan(self):
+        self.device_menu.clear()
+        self.scan('192.168.1.0/24')
+
     def scan(self, ip):
         arp_request = scapy.ARP(pdst=ip)
         broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
         arp_request_broadcast = broadcast/arp_request
         answered_list = scapy.srp(arp_request_broadcast, timeout=2, verbose=False)[0]
-
-        self.device_menu = QMenu("Devices")
+        
+        self.rescanAction = self.device_menu.addAction(self.rescanIcon,"Rescan")
+        self.rescanAction.triggered.connect(self.rescan)
+        self.device_menu.addSeparator()
 
         clients_list = []
 
-        # FIXME: Path for macaddress.io-db.json for dev
-        # BODY: If doing dev we need to specify the path using another method
-        qf = QFile(data.__file__.replace("__init__.pyo", "macaddress.io-db.json"))
-        qf.open(QIODevice.ReadOnly | QIODevice.Text)
-        content = qf.readAll()
+        self.databaseFile.open(QIODevice.ReadOnly | QIODevice.Text)
+        content = self.databaseFile.readAll()
         content = bytes(content).decode().split("\n")
-        qf.close()
+        self.databaseFile.close()
 
         # Remove last empty item
         del content[-1]
@@ -77,8 +85,6 @@ class Application(QApplication):
             clients_list.append(client_dict)
 
         self.print_result(clients_list)
-
-
 
         self.menu.insertMenu(self.separator, self.device_menu)
 

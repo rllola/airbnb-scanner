@@ -69,3 +69,9 @@ Using semver standard.
 ### Linux libcrypto
 
 Requires `libssl1.1` for the latest version.
+
+----
+
+### Acknowledgment
+
+Reload icon by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar).
