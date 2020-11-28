@@ -10,7 +10,7 @@ Architecture: all
 Essential: no
 Section: utils
 Priority: optional
-Maintainer: Lola Rigaut-Luczak
+Maintainer: Lola Rigaut-Luczak <me@lola.ninja>
 Description: Device scanner to get the camera in your Airbnb.
 EOF
 
