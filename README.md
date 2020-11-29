@@ -59,7 +59,7 @@ sudo apt install libffi-dev
 
 It takes too long to build in CI. Instead builds are being done locally on my computer (maybe for the best).
 ```
-make release TAG=v0.x.x
+make build
 ```
 
 Using semver standard.
