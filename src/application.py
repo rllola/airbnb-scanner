@@ -4,7 +4,6 @@ from PyQt5.QtCore import QFile, QIODevice, QDir
 import json
 import scapy.all as scapy
 import os
-import data
 import sys
 
 
