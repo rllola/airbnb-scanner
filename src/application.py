@@ -1,6 +1,9 @@
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QFile, QIODevice, QDir
+
+from about import AboutWidget
+
 import json
 import scapy.all as scapy
 import os
@@ -14,13 +17,19 @@ class Application(QApplication):
         super(QApplication,self).__init__(*args, **kwargs)
         print('Application initiated')
 
+        self.about_window = AboutWidget()
+
         print("Creating menu...")
+        # TODO: Create a menu class
+        # BODY: Create a menu class to make Application class lighter.
         self.menu = QMenu()
         self.device_menu = QMenu("Devices")
         self.separator = self.menu.addSeparator()
+        self.aboutAction = self.menu.addAction("About")
+        self.aboutAction.triggered.connect(self.about_window.show)
         self.quitAction = self.menu.addAction("Quit")
         self.quitAction.triggered.connect(self.quit)
-
+        
         prefix_path = "."
 
         if ":/" in sys.path:
@@ -41,7 +50,7 @@ class Application(QApplication):
         self.tray.show()
 
         # We are scanning local IP
-        self.scan('192.168.1.0/24')
+        self.scan('192.168.1.0/24')    
 
     def rescan(self):
         self.device_menu.clear()
