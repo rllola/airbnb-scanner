@@ -6,7 +6,8 @@ services:
   - xvfb
 
 install:
-  - pip install setuptools pyqtdeploy
+  - pip install pylint
   - pip install -r requirements.txt
+  
 script:
-  - python -c "print('Need to write test')"
+  - pylint src/

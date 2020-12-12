@@ -1,0 +1,7 @@
+[MASTER]
+extension-pkg-whitelist=PyQt5
+disable=
+    C0114,
+    W0511,
+    W0640,
+    R0801,
