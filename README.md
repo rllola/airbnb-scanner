@@ -75,3 +75,4 @@ Requires `libssl1.1` for the latest version.
 ### Acknowledgment
 
 Reload icon by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar).
+Warning icon by [Kit of Parts](http://kitofparts.co/)
