@@ -1,4 +1,4 @@
-VERSION = $$(head -n 1 src/__init__.py | grep -o '"[^"]\+"' | sed 's/"//g')
+VERSION = $$(head -n 1 src/info.py | grep -o '"[^"]\+"' | sed 's/"//g')
 
 build:
 	python build.py --no-sysroot
