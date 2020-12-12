@@ -3,6 +3,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QFile, QIODevice, QDir
 
 from about import AboutWidget
+from device_info import DeviceInfoWidget
 
 import json
 import scapy.all as scapy
@@ -18,6 +19,7 @@ class Application(QApplication):
         print('Application initiated')
 
         self.about_window = AboutWidget()
+        self.device_info = DeviceInfoWidget()
 
         print("Creating menu...")
         # TODO: Create a menu class
@@ -30,18 +32,26 @@ class Application(QApplication):
         self.quitAction = self.menu.addAction("Quit")
         self.quitAction.triggered.connect(self.quit)
         
+        self.keks = []
+        
         prefix_path = "."
 
         if ":/" in sys.path:
             prefix_path = ":"
 
         self.databaseFile = QFile(os.path.join(prefix_path,"data","macaddress.io-db.json"))
-
+        
+        reportedFile = QFile(os.path.join(prefix_path,"data","reported.txt"))
+        reportedFile.open(QIODevice.ReadOnly | QIODevice.Text)
+        content = reportedFile.readAll()
+        self.reported = bytes(content).decode().split("\n")
+        reportedFile.close()
 
         # FIXME: Detect Dark/Light mode
         # BODY: Pick light or dark icon to fit contrast and make it visible on different theme
         self.icon = QIcon(os.path.join(prefix_path,"icons","spy-light.png"))
         self.rescanIcon = QIcon(os.path.join(prefix_path,"icons","reload.png"))
+        self.warningIcon = QIcon(os.path.join(prefix_path,"icons","warning.png"))
 
         # Create the tray
         self.tray = QSystemTrayIcon(self.icon, None)
@@ -77,18 +87,25 @@ class Application(QApplication):
         del content[-1]
 
         for element in answered_list:
-            print(element[1].hwsrc)
             client_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
 
             company_name = "Unknown"
+            warning = False
             for x in content:
                 entry = json.JSONDecoder().decode(x.strip())
                 if element[1].hwsrc.startswith(entry["oui"].lower()):
-                    print(entry)
                     company_name = entry["companyName"]
+                    if entry["oui"].lower() in self.reported:
+                        warning = True
                     break
 
-            self.device_menu.addAction(company_name + "\n" + element[1].psrc)
+            action_text = "{}\n{}".format(company_name, client_dict["ip"])
+            device_action = self.device_menu.addAction(action_text)
+            if warning:
+                device_action.setIcon(self.warningIcon)
+
+            device_action.triggered.connect(lambda : self.device_info.show_info(client_dict["ip"], client_dict["mac"], company_name))
+
 
             clients_list.append(client_dict)
 
