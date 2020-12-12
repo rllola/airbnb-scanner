@@ -1,12 +1,13 @@
 import json
 import os
 import sys
-# pylint: disable=import-error
-import scapy.all as scapy
 
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QFile, QIODevice
+
+# pylint: disable=import-error
+import scapy.all as scapy
 
 from about import AboutWidget
 from device_info import DeviceInfoWidget
