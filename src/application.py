@@ -11,6 +11,7 @@ import scapy.all as scapy
 
 from about import AboutWidget
 from device_info import DeviceInfoWidget
+from utils import get_ip_mask
 
 # pylint: disable=too-many-instance-attributes
 class Application(QApplication):
@@ -23,6 +24,9 @@ class Application(QApplication):
         self.about_window = AboutWidget()
         self.device_info = DeviceInfoWidget()
 
+        # Get Ip mask to scan on
+        self.ip_mask = get_ip_mask()
+
         print("Creating menu...")
         # TODO: Create a menu class
         # BODY: Create a menu class to make Application class lighter.
@@ -33,8 +37,6 @@ class Application(QApplication):
         self.about_action.triggered.connect(self.about_window.show)
         self.quit_action = self.menu.addAction("Quit")
         self.quit_action.triggered.connect(self.quit)
-
-        self.keks = []
 
         prefix_path = "."
 
@@ -68,15 +70,16 @@ class Application(QApplication):
         self.tray.show()
 
         # We are scanning local IP
-        self.scan('192.168.1.0/24')
+        self.scan(self.ip_mask)
 
     def rescan(self):
         """
         rescan the network
         """
         self.device_menu.clear()
-        self.scan('192.168.1.0/24')
+        self.scan(self.ip_mask)
 
+    # pylint: disable=too-many-locals
     def scan(self, ip_mask):
         """
         scan local network
@@ -112,11 +115,19 @@ class Application(QApplication):
             if warning:
                 device_action.setIcon(self.warning_icon)
 
+            def triggered_info(client_ip, client_mac, company):
+                self.device_info.show_info(
+                    client_ip,
+                    client_mac,
+                    company)
+
             device_action.triggered.connect(
-                lambda: self.device_info.show_info(
-                    client_dict["ip"],
-                    client_dict["mac"],
-                    company_name))
+                lambda x,
+                       client_ip=client_dict["ip"],
+                       client_mac=client_dict["mac"],
+                       company=company_name:
+                triggered_info(client_ip, client_mac, company)
+            )
 
 
             clients_list.append(client_dict)
