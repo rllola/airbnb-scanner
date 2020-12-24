@@ -79,6 +79,7 @@ class Application(QApplication):
         self.device_menu.clear()
         self.scan(self.ip_mask)
 
+    # pylint: disable=too-many-locals
     def scan(self, ip_mask):
         """
         scan local network
@@ -114,11 +115,19 @@ class Application(QApplication):
             if warning:
                 device_action.setIcon(self.warning_icon)
 
+            def triggered_info(client_ip, client_mac, company):
+                self.device_info.show_info(
+                    client_ip,
+                    client_mac,
+                    company)
+
             device_action.triggered.connect(
-                lambda: self.device_info.show_info(
-                    client_dict["ip"],
-                    client_dict["mac"],
-                    company_name))
+                lambda x,
+                       client_ip=client_dict["ip"],
+                       client_mac=client_dict["mac"],
+                       company=company_name:
+                triggered_info(client_ip, client_mac, company)
+            )
 
 
             clients_list.append(client_dict)
