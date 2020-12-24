@@ -11,6 +11,7 @@ import scapy.all as scapy
 
 from about import AboutWidget
 from device_info import DeviceInfoWidget
+from utils import get_ip_mask
 
 # pylint: disable=too-many-instance-attributes
 class Application(QApplication):
@@ -22,6 +23,9 @@ class Application(QApplication):
 
         self.about_window = AboutWidget()
         self.device_info = DeviceInfoWidget()
+        
+        # Get Ip mask to scan on
+        self.ip_mask = get_ip_mask()
 
         print("Creating menu...")
         # TODO: Create a menu class
@@ -33,8 +37,6 @@ class Application(QApplication):
         self.about_action.triggered.connect(self.about_window.show)
         self.quit_action = self.menu.addAction("Quit")
         self.quit_action.triggered.connect(self.quit)
-
-        self.keks = []
 
         prefix_path = "."
 
@@ -68,14 +70,14 @@ class Application(QApplication):
         self.tray.show()
 
         # We are scanning local IP
-        self.scan('192.168.1.0/24')
+        self.scan(self.ip_mask)
 
     def rescan(self):
         """
         rescan the network
         """
         self.device_menu.clear()
-        self.scan('192.168.1.0/24')
+        self.scan(self.ip_mask)
 
     def scan(self, ip_mask):
         """
