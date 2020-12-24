@@ -23,7 +23,7 @@ class Application(QApplication):
 
         self.about_window = AboutWidget()
         self.device_info = DeviceInfoWidget()
-        
+
         # Get Ip mask to scan on
         self.ip_mask = get_ip_mask()
 
