@@ -3,13 +3,14 @@ import os
 import sys
 
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPalette
 from PyQt5.QtCore import QFile, QIODevice
 
 # pylint: disable=import-error
 import scapy.all as scapy
 
 from about import AboutWidget
+from preferences import PreferencesWidget
 from device_info import DeviceInfoWidget
 from utils import get_ip_mask
 
@@ -22,6 +23,7 @@ class Application(QApplication):
         print('Application initiated')
 
         self.about_window = AboutWidget()
+        self.preferences_window = PreferencesWidget()
         self.device_info = DeviceInfoWidget()
 
         # Get Ip mask to scan on
@@ -35,6 +37,8 @@ class Application(QApplication):
         self.separator = self.menu.addSeparator()
         self.about_action = self.menu.addAction("About")
         self.about_action.triggered.connect(self.about_window.show)
+        self.preferences_action = self.menu.addAction("Preferences")
+        self.preferences_action.triggered.connect(self.preferences_window.show)
         self.quit_action = self.menu.addAction("Quit")
         self.quit_action.triggered.connect(self.quit)
 
@@ -59,9 +63,10 @@ class Application(QApplication):
 
         # FIXME: Detect Dark/Light mode
         # BODY: Pick light or dark icon to fit contrast and make it visible on different theme
-        self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.png"))
-        self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload.png"))
-        self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning.png"))
+        self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.svg"))
+        
+        self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload-light.svg"))
+        self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning-light.svg"))
 
         # Create the tray
         self.tray = QSystemTrayIcon(self.icon, None)
