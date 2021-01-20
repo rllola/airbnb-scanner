@@ -3,7 +3,7 @@ import os
 import sys
 
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
-from PyQt5.QtGui import QIcon, QPalette
+from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QFile, QIODevice
 
 # pylint: disable=import-error
@@ -18,12 +18,15 @@ from utils import get_ip_mask
 class Application(QApplication):
     """Application class"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, config, *args, **kwargs):
         super().__init__(*args, **kwargs)
         print('Application initiated')
 
+        self.config = config
+        self.dark_mode = self.config['theme'].getboolean('DarkMode')
+
         self.about_window = AboutWidget()
-        self.preferences_window = PreferencesWidget()
+        self.preferences_window = PreferencesWidget(config, self.handle_dark_mode_change)
         self.device_info = DeviceInfoWidget()
 
         # Get Ip mask to scan on
@@ -61,12 +64,14 @@ class Application(QApplication):
 
         del self.mac_address_database[-1]
 
-        # FIXME: Detect Dark/Light mode
-        # BODY: Pick light or dark icon to fit contrast and make it visible on different theme
-        self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.svg"))
-        
-        self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload-light.svg"))
-        self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning-light.svg"))
+        if self.dark_mode:
+            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.svg"))
+            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload-light.svg"))
+            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning-light.svg"))
+        else:
+            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy.svg"))
+            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload.svg"))
+            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning.svg"))
 
         # Create the tray
         self.tray = QSystemTrayIcon(self.icon, None)
@@ -76,6 +81,40 @@ class Application(QApplication):
 
         # We are scanning local IP
         self.scan(self.ip_mask)
+
+    def handle_dark_mode_change(self):
+        """
+        handle theme changes in the applicatino
+        """
+        config_path = os.path.join(os.path.expanduser('~'), '.config', 'AirbnbScanner')
+        config_file = os.path.join(config_path, 'config.ini')
+
+        self.config['theme']['DarkMode'] = 'true'
+        # Update config file
+        with open(config_file, 'w') as file:
+            self.config.write(file)
+
+        self.dark_mode = not self.dark_mode
+        prefix_path = "."
+        if ":/" in sys.path:
+            prefix_path = ":"
+
+        if self.dark_mode:
+            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.svg"))
+            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload-light.svg"))
+            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning-light.svg"))
+        else:
+            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy.svg"))
+            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload.svg"))
+            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning.svg"))
+
+        for action in self.device_menu.actions():
+            if action.iconText() == 'Rescan':
+                action.setIcon(self.rescan_icon)
+            elif not action.icon().isNull():
+                action.setIcon(self.warning_icon)
+
+        self.tray.setIcon(self.icon)
 
     def rescan(self):
         """
@@ -136,8 +175,6 @@ class Application(QApplication):
 
 
             clients_list.append(client_dict)
-
-        print_result(clients_list)
 
         self.menu.insertMenu(self.separator, self.device_menu)
 
