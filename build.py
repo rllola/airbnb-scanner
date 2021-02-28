@@ -130,7 +130,7 @@ if build_sysroot:
     if verbose:
         args.append('--verbose')
 
-    args.append('sysroot.json')
+    args.append('sysroot.toml')
 
     run(args)
 
