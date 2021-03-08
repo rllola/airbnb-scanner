@@ -110,3 +110,9 @@ install_from_source = false
 [zlib.win]
 install_from_source = true
 static_msvc_runtime = true
+
+# scapy ########################################################################
+
+[scapy]
+version = "2.4.3"
+install_from_source = true

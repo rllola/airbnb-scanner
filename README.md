@@ -20,7 +20,7 @@ Call it `venv` really important!
 
 ```
 $ virtualenv venv -p $(which python3.7) --always-copy
-$ source venv\bin\activate
+$ source venv/bin/activate
 ```
 
 You will also need to give special permission to use scapy newtorks feature.
@@ -75,11 +75,16 @@ $ & 'C:\Program Files (x86)\NSIS\Bin\makensis.exe' /DTAG=$tag /DSIZE=$size /DMAJ
 
 ### Linux
 
+!!!Important!!!
+We stick pyqtdeploy 2.5.1 and wil upgrade to 3.1 later. Still having some issue.
+
 Linux use (PyQtDeploy)[https://www.riverbankcomputing.com/static/Docs/pyqtdeploy/] to build the Airbnb Camera Scanner.
 
 ```
-$ pip install pyqtdeploy
+$ pip install pyqtdeploy==2.5.1
+$ make patches
 ```
+This version need to be patches to succefully build the project.
 
 Download the sources files to be compiled.
 ```
@@ -113,6 +118,8 @@ But also we need `$XDG_RUNTIME_DIR` to match the user folder so no root to see t
 ----
 
 ### Packaging with pyqtdeploy
+
+You will probably need all this dependencies (https://doc.qt.io/qt-5/linux-requirements.html).
 
 Error :
 ```

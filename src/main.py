@@ -4,6 +4,8 @@ import platform
 import configparser
 from PyQt5.QtCore import QDir
 
+print(sys.path)
+
 from application import Application
 
 def main():
