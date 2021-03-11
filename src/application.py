@@ -89,6 +89,8 @@ class Application(QApplication):
             self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload.svg"))
             self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning.svg"))
 
+
+        print(os.path.join(prefix_path, "icons", "spy-light.svg"))
         # Create the tray
         self.tray = QSystemTrayIcon(self.icon, None)
         self.tray.setContextMenu(self.menu)
@@ -149,6 +151,8 @@ class Application(QApplication):
         arp_request_broadcast = broadcast/arp_request
         answered_list = srp(arp_request_broadcast, timeout=2, verbose=False)[0]
 
+        print("Scanning...")
+
         self.rescan_action = self.device_menu.addAction(self.rescan_icon, "Rescan")
         self.rescan_action.triggered.connect(self.rescan)
         self.device_menu.addSeparator()
@@ -190,6 +194,7 @@ class Application(QApplication):
 
             clients_list.append(client_dict)
 
+        print("INSERT MENU")
         self.menu.insertMenu(self.separator, self.device_menu)
 
 

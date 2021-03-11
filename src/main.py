@@ -4,6 +4,7 @@ import platform
 import configparser
 from application import Application
 
+
 def main():
     """
     main function to launch the program
@@ -25,12 +26,10 @@ def main():
     config.read(config_file)
 
     print('Starting...')
-    print(sys.argv)
     app = Application(config, config_file, sys.argv)
 
     print('Executing...')
     sys.exit(app.exec_())
 
 
-if __name__ == '__main__':
-    main()
+main()
