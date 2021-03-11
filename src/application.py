@@ -5,9 +5,9 @@ import platform
 
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import QFile, QIODevice, QLibraryInfo
+from PyQt5.QtCore import QFile, QIODevice
 
-# pylint: disable=import-error
+# pylint: disable=no-name-in-module
 from scapy.all import ARP, Ether, srp
 
 from about import AboutWidget
@@ -19,11 +19,10 @@ from utils import get_ip_mask
 class Application(QApplication):
     """Application class"""
 
+    # pylint: disable=too-many-statements
     def __init__(self, config, config_file, *args, **kwargs):
         super().__init__(*args, **kwargs)
         print('Application initiated')
-
-        #print(QLibraryInfo.location(QLibraryInfo.PluginsPath))
 
         self.config = config
         self.config_file = config_file

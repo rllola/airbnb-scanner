@@ -2,18 +2,13 @@ import sys
 import os
 import platform
 import configparser
-from PyQt5.QtCore import QDir
-
-print(sys.path)
-
 from application import Application
 
 def main():
     """
     main function to launch the program
     """
-    # use os.getenv('APPDATA') for windows
-    
+
     # By default path if Linux user path
     config_path = os.path.join(os.path.expanduser('~'), '.config', 'AirbnbScanner')
     if platform.system() == "Windows":
@@ -37,5 +32,5 @@ def main():
     sys.exit(app.exec_())
 
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     main()
