@@ -81,16 +81,15 @@ class Application(QApplication):
                 self.menu.setStyleSheet(dark_stylesheet)
                 self.device_menu.setStyleSheet(dark_stylesheet)
 
-            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.svg"))
-            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload-light.svg"))
-            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning-light.svg"))
+            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.png"))
+            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload-light.png"))
+            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning-light.png"))
         else:
-            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy.svg"))
-            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload.svg"))
-            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning.svg"))
+            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy.png"))
+            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload.png"))
+            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning.png"))
 
 
-        print(os.path.join(prefix_path, "icons", "spy-light.svg"))
         # Create the tray
         self.tray = QSystemTrayIcon(self.icon, None)
         self.tray.setContextMenu(self.menu)
@@ -116,13 +115,13 @@ class Application(QApplication):
             prefix_path = ":"
 
         if self.dark_mode:
-            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.svg"))
-            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload-light.svg"))
-            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning-light.svg"))
+            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.png"))
+            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload-light.png"))
+            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning-light.png"))
         else:
-            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy.svg"))
-            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload.svg"))
-            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning.svg"))
+            self.icon = QIcon(os.path.join(prefix_path, "icons", "spy.png"))
+            self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload.png"))
+            self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning.png"))
 
         for action in self.device_menu.actions():
             if action.iconText() == 'Rescan':
@@ -150,8 +149,6 @@ class Application(QApplication):
         broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
         arp_request_broadcast = broadcast/arp_request
         answered_list = srp(arp_request_broadcast, timeout=2, verbose=False)[0]
-
-        print("Scanning...")
 
         self.rescan_action = self.device_menu.addAction(self.rescan_icon, "Rescan")
         self.rescan_action.triggered.connect(self.rescan)
@@ -194,15 +191,4 @@ class Application(QApplication):
 
             clients_list.append(client_dict)
 
-        print("INSERT MENU")
         self.menu.insertMenu(self.separator, self.device_menu)
-
-
-def print_result(results_list):
-    """
-    Print the IP/MAC table
-    """
-    print("IP\t\t\tMAC Address")
-    print("----------------------------------------------------")
-    for client in results_list:
-        print(client["ip"] + "\t\t" + client["mac"])
