@@ -12,7 +12,7 @@ datas += Tree('icons', prefix='icons', excludes=[])
 a = Analysis(['src/main.py'],
              binaries=[],
              datas=[],
-             hiddenimports=[],
+             hiddenimports=['json', 'os', 'sys', 'platform', 'scapy'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],

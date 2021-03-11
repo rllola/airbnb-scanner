@@ -1,0 +1,118 @@
+# The sysroot for the Airbnb Scanner application.
+
+# OpenSSL #####################################################################
+
+[OpenSSL]
+version = "1.1.1g"
+
+[OpenSSL.linux]
+install_from_source = false
+
+
+# Python ######################################################################
+
+[Python]
+version = "3.7.8"
+install_host_from_source = true
+
+[Python.win]
+install_host_from_source = false
+
+
+# PyQt ########################################################################
+
+[PyQt]
+version = "5.15.2"
+
+[PyQt.linux]
+installed_modules = ["QtCore", "QtGui", "QtNetwork", "QtWidgets", "QtX11Extras"]
+
+[PyQt.win]
+disabled_features = ["PyQt_Desktop_OpenGL"]
+installed_modules = ["QtCore", "QtGui", "QtNetwork", "QtWidgets", "QtWinExtras"]
+
+[PyQt.macos]
+installed_modules = ["QtCore", "QtGui", "QtNetwork", "QtWidgets", "QtMacExtras"]
+
+[PyQt.android]
+disabled_features = ["PyQt_Desktop_OpenGL", "PyQt_Printer"]
+installed_modules = ["QtCore", "QtGui", "QtNetwork", "QtWidgets", "QtAndroidExtras"]
+
+[PyQt.ios]
+disabled_features = ["PyQt_Desktop_OpenGL", "PyQt_MacOSXOnly", "PyQt_MacCocoaViewContainer", "PyQt_Printer", "PyQt_Process", "PyQt_NotBootstrapped"]
+installed_modules = ["QtCore", "QtGui", "QtNetwork", "QtWidgets", "QtMacExtras"]
+
+# Qt ##########################################################################
+
+[Qt]
+version = "5.15.2"
+edition = "opensource"
+configure_options = ["-opengl", "desktop", "-qt-pcre"]
+skip = [
+  "qt3d",
+  "qtactiveqt",
+  "qtandroidextras",
+  "qtcanvas3d",
+  "qtcharts",
+  "qtconnectivity",
+  "qtdatavis3d",
+  "qtdoc",
+  "qtgamepad",
+  "qtgraphicaleffects",
+  "qtimageformats",
+  "qtlocation",
+  "qtmacextras",
+  "qtmultimedia",
+  "qtnetworkauth",
+  "qtpurchasing",
+  "qtquickcontrols",
+  "qtquickcontrols2",
+  "qtremoteobjects",
+  "qtscript",
+  "qtscxml",
+  "qtsensors",
+  "qtserialbus",
+  "qtserialport",
+  "qtspeech",
+  "qtsvg",
+  "qttools",
+  "qttranslations",
+  "qtvirtualkeyboard",
+  "qtwayland",
+  "qtwebchannel",
+  "qtwebengine",
+  "qtwebsockets",
+  "qtwebview",
+  "qtxmlpatterns"
+]
+
+[Qt.linux]
+ssl = "openssl-runtime"
+
+[Qt.win]
+ssl = "openssl-linked"
+static_msvc_runtime = true
+
+
+# SIP #########################################################################
+
+[SIP]
+version = "12.8.1"
+module_name = "PyQt5.sip"
+
+
+# zlib ########################################################################
+
+[zlib]
+version = "1.2.11"
+install_from_source = false
+
+[zlib.win]
+install_from_source = true
+static_msvc_runtime = true
+
+# scapy ########################################################################
+
+[scapy]
+version = "2.4.3"
+install_from_source = true

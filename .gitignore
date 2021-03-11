@@ -8,3 +8,8 @@ pkg-debian/usr/share/
 *.tar.xz
 sysroot-*
 build-*
+*.zip
+.vs
+*.pyo
+*.exe
+idea.txt

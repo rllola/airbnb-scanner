@@ -1,13 +1,14 @@
 import json
 import os
 import sys
+import platform
 
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QFile, QIODevice
 
-# pylint: disable=import-error
-import scapy.all as scapy
+# pylint: disable=no-name-in-module
+from scapy.all import ARP, Ether, srp
 
 from about import AboutWidget
 from preferences import PreferencesWidget
@@ -18,11 +19,13 @@ from utils import get_ip_mask
 class Application(QApplication):
     """Application class"""
 
-    def __init__(self, config, *args, **kwargs):
+    # pylint: disable=too-many-statements
+    def __init__(self, config, config_file, *args, **kwargs):
         super().__init__(*args, **kwargs)
         print('Application initiated')
 
         self.config = config
+        self.config_file = config_file
         self.dark_mode = self.config['theme'].getboolean('DarkMode')
 
         self.about_window = AboutWidget()
@@ -49,6 +52,8 @@ class Application(QApplication):
 
         if ":/" in sys.path:
             prefix_path = ":"
+        elif platform.system() == "Windows":
+            prefix_path = ""
 
         database_file = QFile(os.path.join(prefix_path, "data", "macaddress.io-db.json"))
         database_file.open(QIODevice.ReadOnly | QIODevice.Text)
@@ -65,6 +70,17 @@ class Application(QApplication):
         del self.mac_address_database[-1]
 
         if self.dark_mode:
+            dark_stylesheet = """
+            QMenu {background-color: #19FFFFFF; color: white; padding: 20px 1px; min-width: 200px; border: 1px solid white;}
+            QMenu::item {padding: 8px 20px;}
+            QMenu::icon {margin-right: 20px;}
+            QMenu::item:selected {background: rgba(100, 100, 100, 150);}
+            """
+
+            if platform.system() == "Windows":
+                self.menu.setStyleSheet(dark_stylesheet)
+                self.device_menu.setStyleSheet(dark_stylesheet)
+
             self.icon = QIcon(os.path.join(prefix_path, "icons", "spy-light.svg"))
             self.rescan_icon = QIcon(os.path.join(prefix_path, "icons", "reload-light.svg"))
             self.warning_icon = QIcon(os.path.join(prefix_path, "icons", "warning-light.svg"))
@@ -86,12 +102,10 @@ class Application(QApplication):
         """
         handle theme changes in the applicatino
         """
-        config_path = os.path.join(os.path.expanduser('~'), '.config', 'AirbnbScanner')
-        config_file = os.path.join(config_path, 'config.ini')
 
         self.config['theme']['DarkMode'] = 'true'
         # Update config file
-        with open(config_file, 'w') as file:
+        with open(self.config_file, 'w') as file:
             self.config.write(file)
 
         self.dark_mode = not self.dark_mode
@@ -129,11 +143,11 @@ class Application(QApplication):
         scan local network
         """
         # pylint: disable=no-member
-        arp_request = scapy.ARP(pdst=ip_mask)
+        arp_request = ARP(pdst=ip_mask)
         # pylint: disable=no-member
-        broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+        broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
         arp_request_broadcast = broadcast/arp_request
-        answered_list = scapy.srp(arp_request_broadcast, timeout=2, verbose=False)[0]
+        answered_list = srp(arp_request_broadcast, timeout=2, verbose=False)[0]
 
         self.rescan_action = self.device_menu.addAction(self.rescan_icon, "Rescan")
         self.rescan_action.triggered.connect(self.rescan)

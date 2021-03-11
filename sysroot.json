@@ -37,7 +37,7 @@
 
     "sip": {
         "module_name":  "PyQt5.sip",
-        "linux#source":       "sip-4.19.23.tar.gz"
+        "linux#source":       "sip-4.19.24.tar.gz"
     },
 
     "pyqt5": {

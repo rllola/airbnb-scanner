@@ -16,14 +16,89 @@ Here : Mi Home Security Camera 360° 1080P by Xiaomi.
 
 Call it `venv` really important!
 
+#### Linux
+
 ```
 $ virtualenv venv -p $(which python3.7) --always-copy
-$ source venv\bin\activate
+$ source venv/bin/activate
 ```
 
+You will also need to give special permission to use scapy newtorks feature.
+```
+$ setcap cap_net_raw=eip venv/bin/python
+```
 
+And install python dependecies.
 ```
 $ pip install -r requirements.txt
+```
+
+#### Windows
+
+```
+$ virtualenv venv
+$ .\venv\Script\activate
+```
+
+For windows you will need Npcap : https://nmap.org/npcap/
+
+And install python dependecies.
+```
+$ pip install -r requirements.txt
+```
+
+## Build
+
+### Windows
+
+Windows use (PyInstaller)[http://www.pyinstaller.org/] to build the Airbnb Camera Scanner.
+```
+$ pip install pyinstaller
+```
+
+Build command:
+```
+$ pyinstaller airbnb-scanner.spec
+```
+
+The working executable is in the `dist` folder and called `AirbnbScanner.exe`.
+
+You can now create an installer for Windows.
+You will need to install NSIS software : https://nsis.sourceforge.io/Download
+In your favorite PowerShell terminal :
+```
+$ $tag = "v0.0.0"
+$ $size = [math]::floor((Get-ChildItem dist\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
+$ $major, $minor, $build = $tag.substring(1).split(".")
+$ & 'C:\Program Files (x86)\NSIS\Bin\makensis.exe' /DTAG=$tag /DSIZE=$size /DMAJOR=$major /DMINOR=$minor /DBUILD=$build zeronetbrowser.nsi
+```
+
+### Linux
+
+!!!Important!!!
+We stick pyqtdeploy 2.5.1 and wil upgrade to 3.1 later. Still having some issue.
+
+Linux use (PyQtDeploy)[https://www.riverbankcomputing.com/static/Docs/pyqtdeploy/] to build the Airbnb Camera Scanner.
+
+```
+$ pip install pyqtdeploy==2.5.1
+$ make patches
+```
+This version need to be patches to succefully build the project.
+
+Download the sources files to be compiled.
+```
+$ make download
+```
+
+Create sysroot folder.
+```
+$ make init
+```
+
+Build.
+```
+$ make build
 ```
 
 ## Notes
@@ -43,6 +118,8 @@ But also we need `$XDG_RUNTIME_DIR` to match the user folder so no root to see t
 ----
 
 ### Packaging with pyqtdeploy
+
+You will probably need all this dependencies (https://doc.qt.io/qt-5/linux-requirements.html).
 
 Error :
 ```
@@ -72,7 +149,18 @@ Requires `libssl1.1` for the latest version.
 
 ----
 
+### [Windows] Install npcap
+
+Error:
+```
+RuntimeError: Sniffing and sending packets is not available at layer 2: winpcap is not installed. You may use conf.L3socket orconf.L3socket6 to access layer 3
+```
+
+https://nmap.org/npcap/
+
+
 ### Acknowledgment
 
 Reload icon by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar).
-Warning icon by [Kit of Parts](http://kitofparts.co/)
+Warning icon by [Kit of Parts](http://kitofparts.co/).
+B. for testing Windows build.

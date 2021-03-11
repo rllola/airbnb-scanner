@@ -115,6 +115,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 sysroot_dir = 'sysroot-' + target
 build_dir = 'build-' + target
 host_bin_dir = os.path.abspath(os.path.join(sysroot_dir, 'host', 'bin'))
+qt_bin_dir = os.path.abspath(os.path.join(sysroot_dir, 'Qt', 'bin'))
 
 # Build sysroot.
 if build_sysroot:
@@ -133,6 +134,7 @@ if build_sysroot:
     args.append('sysroot.json')
 
     run(args)
+
 
 run(['pyqtdeploy-build', '--target', target, '--sysroot', sysroot_dir,
             '--build-dir', build_dir, project])

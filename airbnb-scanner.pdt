@@ -1,0 +1,177 @@
+version = 0
+sysroot = ""
+sysroots_dir = ""
+parts = [ "Python:sysconfig", "Python:zlib", "PyQt:PyQt5.QtWidgets", "PyQt:PyQt5.QtX11Extras", "Python:importlib.resources", "Python:ssl", "PyQt:PyQt5.QtNetwork", "Python:configparser", "Python:json", "Python:platform", "Python:webbrowser", "Python:__future__", "Python:logging", "Python:cgi", "Python:gzip", "scapy:scapy", "Python:ctypes", "Python:ctypes.util"]
+
+[Application]
+entry_point = ""
+is_console = false
+is_bundle = false
+name = "AirbnbScanner"
+qmake_configuration = ""
+script = "src/main.py"
+syspath = ""
+
+[Application.Package]
+name = "/home/lola/Workspace/AirbnbScanner"
+exclude = [ "__pycache__", "*.tar.gz", ".github", ".gitignore", "*.tar.xz", ".pylintrc", ".vs", ".vscode", ".travis.yml", "sysroot-win-64", "build-win-64", "*.pyo", "screenshots", "patches", "pkg-debian", "scripts", "build-linux-64", "sysroot-linux-64", "venv",]
+[[Application.Package.Content]]
+name = "airbnb-scanner.pdt"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "airbnb-scanner.spec"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "airbnbscanner.nsi"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "build.py"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "COPYING"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "data"
+included = false
+is_directory = true
+[[Application.Package.Content.Content]]
+name = "macaddress.io-db.json"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "reported.txt"
+included = false
+is_directory = false
+
+
+[[Application.Package.Content]]
+name = "icons"
+included = false
+is_directory = true
+[[Application.Package.Content.Content]]
+name = "reload-light.svg"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "reload.svg"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "spy-light.svg"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "spy.icns"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "spy.ico"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "spy.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "spy.svg"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "warning-light.svg"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "warning.svg"
+included = false
+is_directory = false
+
+
+[[Application.Package.Content]]
+name = "LICENSE"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "makefile"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "README.md"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "requirements.txt"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "scapy.py"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "src"
+included = true
+is_directory = true
+[[Application.Package.Content.Content]]
+name = "about.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "application.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "device_info.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "info.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "main.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "preferences.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "utils.py"
+included = true
+is_directory = false
+
+
+[[Application.Package.Content]]
+name = "sysroot.toml"
+included = false
+is_directory = false
+
