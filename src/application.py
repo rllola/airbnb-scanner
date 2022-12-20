@@ -3,9 +3,9 @@ import os
 import sys
 import platform
 
-from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import QFile, QIODevice
+from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
+from PyQt6.QtGui import QIcon
+from PyQt6.QtCore import QFile, QIODevice
 
 # pylint: disable=no-name-in-module
 from scapy.all import ARP, Ether, srp
@@ -56,13 +56,13 @@ class Application(QApplication):
             prefix_path = ""
 
         database_file = QFile(os.path.join(prefix_path, "data", "macaddress.io-db.json"))
-        database_file.open(QIODevice.ReadOnly | QIODevice.Text)
+        database_file.open(QIODevice.OpenModeFlag.ReadOnly | QIODevice.OpenModeFlag.Text)
         self.mac_address_database = database_file.readAll()
         self.mac_address_database = bytes(self.mac_address_database).decode().split("\n")
         database_file.close()
 
         reported_file = QFile(os.path.join(prefix_path, "data", "reported.txt"))
-        reported_file.open(QIODevice.ReadOnly | QIODevice.Text)
+        reported_file.open(QIODevice.OpenModeFlag.ReadOnly | QIODevice.OpenModeFlag.Text)
         content = reported_file.readAll()
         self.reported = bytes(content).decode().split("\n")
         reported_file.close()

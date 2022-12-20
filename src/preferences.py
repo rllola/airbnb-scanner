@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QCheckBox
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QCheckBox
 
 class PreferencesWidget(QWidget):
     """PreferencesWidget class"""
