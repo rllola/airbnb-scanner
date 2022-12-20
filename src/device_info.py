@@ -2,8 +2,8 @@ import webbrowser
 import os
 
 from urllib.parse import urlencode
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QPushButton
-from PyQt5.QtCore import Qt
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QPushButton
+from PyQt6.QtCore import Qt
 from info import __email__, __github__
 
 class DeviceInfoWidget(QWidget):
@@ -16,7 +16,7 @@ class DeviceInfoWidget(QWidget):
         layout = QVBoxLayout()
         self.label = QLabel()
         self.label.setOpenExternalLinks(True)
-        self.label.setTextFormat(Qt.RichText)
+        self.label.setTextFormat(Qt.TextFormat.RichText)
 
         self.report_email_button = QPushButton("Report by email")
         self.report_email_button.clicked.connect(self.open_email)

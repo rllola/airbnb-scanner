@@ -29,7 +29,7 @@ def main():
     app = Application(config, config_file, sys.argv)
 
     print('Executing...')
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 
 main()

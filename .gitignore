@@ -13,3 +13,4 @@ build-*
 *.pyo
 *.exe
 idea.txt
+venv/

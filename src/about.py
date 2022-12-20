@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
-from PyQt5.QtCore import Qt
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout
+from PyQt6.QtCore import Qt
 
 from info import __version__, __author__, __email__, __github__
 
@@ -11,7 +11,7 @@ class AboutWidget(QWidget):
         layout = QVBoxLayout()
         self.label = QLabel()
         self.label.setOpenExternalLinks(True)
-        self.label.setTextFormat(Qt.RichText)
+        self.label.setTextFormat(Qt.TextFormat.RichText)
         self.label.setText(
             """
             <center>

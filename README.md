@@ -19,7 +19,7 @@ Call it `venv` really important!
 #### Linux
 
 ```
-$ virtualenv venv -p $(which python3.7) --always-copy
+$ virtualenv venv -p $(which python3.9) --always-copy
 $ source venv/bin/activate
 ```
 
@@ -30,6 +30,7 @@ $ setcap cap_net_raw=eip venv/bin/python
 
 And install python dependecies.
 ```
+$ pip install --upgrade pip
 $ pip install -r requirements.txt
 ```
 
@@ -44,6 +45,7 @@ For windows you will need Npcap : https://nmap.org/npcap/
 
 And install python dependecies.
 ```
+$ pip install --upgrade pip
 $ pip install -r requirements.txt
 ```
 
@@ -148,6 +150,16 @@ Using semver standard.
 Requires `libssl1.1` for the latest version.
 
 ----
+
+### `pip install` error 
+
+Error
+```
+AttributeError: module 'sipbuild.api' has no attribute 'prepare_metadata_for_build_wheel'
+```
+
+Solution: update pip to version 22 `pip install --upgrade pip`
+
 
 ### [Windows] Install npcap
 
